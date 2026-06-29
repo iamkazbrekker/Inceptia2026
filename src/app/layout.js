@@ -1,5 +1,6 @@
 import { Inter, Noto_Serif } from "next/font/google";
 import "./globals.css";
+import WandCursor from "./components/WandCursor";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="bg-background text-on-surface font-body-md overflow-x-hidden min-h-screen relative antialiased">
+        <WandCursor />
         {children}
       </body>
     </html>

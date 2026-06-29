@@ -9,6 +9,22 @@
 }
 
 @font-face {
+  font-family: 'ParryHotter';
+  src: url('/fonts/ParryHotter.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HarryPotterBold';
+  src: url('/fonts/HARRYP__.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'DragonHunter';
   src: url('/fonts/DragonHunter-9Ynxj.otf') format('opentype');
   font-weight: normal;
@@ -79,6 +95,8 @@
   --spacing-margin-desktop: 64px;
   --spacing-gutter: 24px;
 
+  --font-harry-potter-bold: "HarryPotterBold", sans-serif;
+  --font-parry-hotter: "ParryHotter", sans-serif;
   --font-harry-potter: "HarryPotter", sans-serif;
   --font-dragon-hunter: "DragonHunter", sans-serif;
   --font-gotika: "GotikaBlack", sans-serif;
@@ -93,8 +111,18 @@
   --font-display-lg: var(--font-dragon-hunter), sans-serif;
 }
 
+@media (pointer: fine) {
+  * {
+    cursor: none;
+  }
+}
+
 /* Base Headings Style */
-h2, h3, h4, h5, h6 {
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-dragon-hunter), sans-serif;
 }
 
@@ -103,19 +131,37 @@ h2, h3, h4, h5, h6 {
 .pulse-gold {
   animation: pulseGold 2s infinite;
 }
+
 @keyframes pulseGold {
-  0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(255, 215, 0, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+  }
 }
 
 .float-anim {
   animation: float 6s ease-in-out infinite;
 }
+
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .glass-card {
@@ -140,9 +186,17 @@ h2, h3, h4, h5, h6 {
 .footprints {
   animation: footprintsAnim 2s infinite alternate ease-in-out;
 }
+
 @keyframes footprintsAnim {
-  0% { opacity: 0.2; transform: translateY(0); }
-  100% { opacity: 0.8; transform: translateY(10px); }
+  0% {
+    opacity: 0.2;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0.8;
+    transform: translateY(10px);
+  }
 }
 
 .prize-border {
@@ -154,9 +208,11 @@ h2, h3, h4, h5, h6 {
 .perspective-1000 {
   perspective: 1000px;
 }
+
 .preserve-3d {
   transform-style: preserve-3d;
 }
+
 .backface-hidden {
   backface-visibility: hidden;
 }
@@ -165,14 +221,17 @@ h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar {
   width: 10px;
 }
+
 ::-webkit-scrollbar-track {
   background: #131313;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #ffd700;
   border-radius: 5px;
   border: 2px solid #131313;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #ffe16d;
 }

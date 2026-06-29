@@ -10,7 +10,7 @@ import {
   useScroll,
   useReducedMotion,
 } from "framer-motion";
-
+import Image from "next/image";
 // Helper components
 
 // 1. Magnetic Button Component
@@ -112,7 +112,7 @@ export function Card3D({ children, className }) {
     <div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`perspective-1000 cursor-pointer ${className}`}
+      className={`perspective-1000 ${className}`}
     >
       <motion.div
         style={
@@ -141,7 +141,7 @@ export function DomainCard({ icon, title, description, shouldReduce, variants })
       variants={variants}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="glass-card p-8 rounded-xl flex flex-col items-center text-center cursor-pointer relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,215,0,0.1)]"
+      className="glass-card p-8 rounded-xl flex flex-col items-center text-center relative overflow-hidden transition-all duration-300 hover:shadow-[0_0_20px_rgba(255,215,0,0.1)]"
     >
       <motion.span
         animate={shouldReduce ? {} : { y: isHovered ? -6 : 0, scale: isHovered ? 1.1 : 1 }}
@@ -210,40 +210,44 @@ export function TimelineNode({ time, title, subtitle, alignRight, delay, shouldR
   );
 }
 
-// 5. Countdown timer component
 export function Countdown() {
   const [timeLeft, setTimeLeft] = useState({
-    days: 245,
-    hours: 12,
-    minutes: 45,
-    seconds: 10,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
   });
 
+  const calculateTimeLeft = () => {
+    const targetDate = new Date("2026-08-07T09:00:00");
+
+    const difference = targetDate.getTime() - Date.now();
+
+    if (difference <= 0) {
+      return {
+        days: 0,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      };
+    }
+
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((difference / (1000 * 60)) % 60),
+      seconds: Math.floor((difference / 1000) % 60),
+    };
+  };
+
   useEffect(() => {
+    // Calculate immediately after mounting
+    setTimeLeft(calculateTimeLeft());
+
     const interval = setInterval(() => {
-      setTimeLeft((prev) => {
-        let { days, hours, minutes, seconds } = prev;
-        if (seconds > 0) {
-          seconds--;
-        } else {
-          seconds = 59;
-          if (minutes > 0) {
-            minutes--;
-          } else {
-            minutes = 59;
-            if (hours > 0) {
-              hours--;
-            } else {
-              hours = 23;
-              if (days > 0) {
-                days--;
-              }
-            }
-          }
-        }
-        return { days, hours, minutes, seconds };
-      });
+      setTimeLeft(calculateTimeLeft());
     }, 1000);
+
     return () => clearInterval(interval);
   }, []);
 
@@ -257,7 +261,11 @@ export function Countdown() {
           DAYS
         </span>
       </div>
-      <span className="font-headline-lg text-headline-lg text-outline-variant font-bold">:</span>
+
+      <span className="font-headline-lg text-headline-lg text-outline-variant font-bold">
+        :
+      </span>
+
       <div>
         <span className="block font-headline-lg text-headline-lg text-primary-container font-bold">
           {timeLeft.hours.toString().padStart(2, "0")}
@@ -266,7 +274,11 @@ export function Countdown() {
           HOURS
         </span>
       </div>
-      <span className="font-headline-lg text-headline-lg text-outline-variant font-bold">:</span>
+
+      <span className="font-headline-lg text-headline-lg text-outline-variant font-bold">
+        :
+      </span>
+
       <div>
         <span className="block font-headline-lg text-headline-lg text-primary-container font-bold">
           {timeLeft.minutes.toString().padStart(2, "0")}
@@ -275,7 +287,11 @@ export function Countdown() {
           MINS
         </span>
       </div>
-      <span className="font-headline-lg text-headline-lg text-outline-variant font-bold">:</span>
+
+      <span className="font-headline-lg text-headline-lg text-outline-variant font-bold">
+        :
+      </span>
+
       <div>
         <span className="block font-headline-lg text-headline-lg text-primary-container font-bold">
           {timeLeft.seconds.toString().padStart(2, "0")}
@@ -291,8 +307,186 @@ export function Countdown() {
 export default function Home() {
   const shouldReduce = useReducedMotion();
   const prizesRef = useRef(null);
-
+  const heroRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
+  const [flash, setFlash] = useState(false);
+
+  useEffect(() => {
+    let stormTimeout;
+    const flashTimeouts = [];
+
+    const flash = (delay, duration) => {
+      flashTimeouts.push(
+        setTimeout(() => {
+          setFlash(true);
+
+          flashTimeouts.push(
+            setTimeout(() => {
+              setFlash(false);
+            }, duration)
+          );
+        }, delay)
+      );
+    };
+
+    const triggerStorm = () => {
+      // Random lightning pattern
+      const patterns = [
+        // Single flash
+        [{ d: 0, t: 90 }],
+
+        // Double flash
+        [
+          { d: 0, t: 70 },
+          { d: 140, t: 90 },
+        ],
+
+        // Triple flash
+        [
+          { d: 0, t: 60 },
+          { d: 110, t: 50 },
+          { d: 260, t: 120 },
+        ],
+
+        // Intense storm
+        [
+          { d: 0, t: 50 },
+          { d: 90, t: 40 },
+          { d: 170, t: 70 },
+          { d: 320, t: 140 },
+        ],
+      ];
+
+      const pattern =
+        patterns[Math.floor(Math.random() * patterns.length)];
+
+      pattern.forEach(({ d, t }) => flash(d, t));
+
+      // Next lightning after 6–18 seconds
+      stormTimeout = setTimeout(
+        triggerStorm,
+        6000 + Math.random() * 12000
+      );
+    };
+
+    // Initial delay
+    stormTimeout = setTimeout(
+      triggerStorm,
+      3000 + Math.random() * 4000
+    );
+
+    return () => {
+      clearTimeout(stormTimeout);
+      flashTimeouts.forEach(clearTimeout);
+    };
+  }, []); useEffect(() => {
+    let stormTimeout;
+    const flashTimeouts = [];
+
+    const flash = (delay, duration) => {
+      flashTimeouts.push(
+        setTimeout(() => {
+          setFlash(true);
+
+          flashTimeouts.push(
+            setTimeout(() => {
+              setFlash(false);
+            }, duration)
+          );
+        }, delay)
+      );
+    };
+
+    const triggerStorm = () => {
+      // Random lightning pattern
+      const patterns = [
+        // Single flash
+        [{ d: 0, t: 90 }],
+
+        // Double flash
+        [
+          { d: 0, t: 70 },
+          { d: 140, t: 90 },
+        ],
+
+        // Triple flash
+        [
+          { d: 0, t: 60 },
+          { d: 110, t: 50 },
+          { d: 260, t: 120 },
+        ],
+
+        // Intense storm
+        [
+          { d: 0, t: 50 },
+          { d: 90, t: 40 },
+          { d: 170, t: 70 },
+          { d: 320, t: 140 },
+        ],
+      ];
+
+      const pattern =
+        patterns[Math.floor(Math.random() * patterns.length)];
+
+      pattern.forEach(({ d, t }) => flash(d, t));
+
+      // Next lightning after 6–18 seconds
+      stormTimeout = setTimeout(
+        triggerStorm,
+        6000 + Math.random() * 12000
+      );
+    };
+
+    // Initial delay
+    stormTimeout = setTimeout(
+      triggerStorm,
+      3000 + Math.random() * 4000
+    );
+
+    return () => {
+      clearTimeout(stormTimeout);
+      flashTimeouts.forEach(clearTimeout);
+    };
+  }, []);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+
+    let currentX = window.innerWidth / 2;
+    let currentY = window.innerHeight / 2;
+
+    let targetX = currentX;
+    let targetY = currentY;
+
+    let animationFrame;
+
+    const handleMove = (e) => {
+      const rect = hero.getBoundingClientRect();
+
+      targetX = e.clientX - rect.left;
+      targetY = e.clientY - rect.top;
+    };
+
+    const animate = () => {
+      currentX += (targetX - currentX) * 0.05;
+      currentY += (targetY - currentY) * 0.05;
+
+      hero.style.setProperty("--x", `${currentX}px`);
+      hero.style.setProperty("--y", `${currentY}px`);
+
+      animationFrame = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    window.addEventListener("mousemove", handleMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMove);
+      cancelAnimationFrame(animationFrame);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -342,6 +536,15 @@ export default function Home() {
       },
     },
   };
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navItems = [
+    "About",
+    "Domains",
+    "Timeline",
+    "Prizes",
+    "Contact",
+  ];
 
   return (
     <AnimatePresence>
@@ -349,27 +552,24 @@ export default function Home() {
         {/* Fixed Navigation */}
         <nav
           className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${scrolled
-              ? "bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-lg"
-              : "bg-transparent border-transparent"
+            ? "bg-surface/80 backdrop-blur-xl border-b border-outline-variant/30 shadow-lg"
+            : "bg-transparent"
             }`}
         >
-          <div className="max-w-7xl mx-auto px-margin-desktop py-4 flex items-center justify-between">
-            {/* Left */}
-            <div className="hidden md:block w-32" />
+          <div className="max-w-7xl mx-auto px-5 lg:px-8 py-4 flex items-center justify-between">
 
-            {/* Center Links */}
+            {/* Logo */}
+            <div className="text-xl md:text-2xl font-bold text-primary-container">
+              INCEPTIA
+            </div>
+
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-10">
-              {[
-                "About",
-                "Domains",
-                "Timeline",
-                "Prizes",
-                "Contact",
-              ].map((item) => (
+              {navItems.map((item) => (
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className="group relative font-label-md text-label-md text-on-surface-variant transition-colors duration-300 hover:text-primary"
+                  className="group relative text-on-surface-variant hover:text-primary transition-colors"
                 >
                   {item}
 
@@ -378,60 +578,179 @@ export default function Home() {
               ))}
             </div>
 
-            {/* CTA */}
-            <div>
-              <CastSpellButton className="rounded-md bg-gradient-to-r from-primary-container to-secondary text-on-primary-container px-6 py-2 font-semibold uppercase shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+            {/* Desktop CTA */}
+            <div className="hidden md:block">
+              <CastSpellButton className="rounded-lg bg-gradient-to-r from-primary-container to-secondary px-6 py-2 font-semibold shadow-lg hover:scale-105 transition">
                 Cast Your Spell
               </CastSpellButton>
             </div>
+
+            {/* Mobile Right */}
+            <div className="flex items-center gap-3 md:hidden">
+
+              <CastSpellButton className="px-4 py-2 rounded-lg text-sm text-black">
+                Register
+              </CastSpellButton>
+
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="text-primary-container"
+              >
+                <span className="material-symbols-outlined text-4xl">
+                  {mobileMenuOpen ? "close" : "menu"}
+                </span>
+              </button>
+
+            </div>
+
           </div>
         </nav>
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+
+          <span className="absolute left-10 top-20 material-symbols-outlined text-yellow-300/20 text-6xl animate-pulse">
+            auto_awesome
+          </span>
+
+          <span className="absolute right-10 bottom-24 material-symbols-outlined text-yellow-300/20 text-5xl animate-pulse delay-300">
+            stars
+          </span>
+
+          <div className="absolute left-1/2 top-1/2 h-72 w-72 rounded-full bg-yellow-400/10 blur-[120px] -translate-x-1/2 -translate-y-1/2" />
+
+        </div>
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-40 bg-[#0b0814]/95 backdrop-blur-2xl md:hidden"
+            >
+              <motion.div
+                initial={{ y: -50 }}
+                animate={{ y: 0 }}
+                exit={{ y: -50 }}
+                transition={{ duration: 0.3 }}
+                className="h-full flex flex-col justify-center items-center gap-10"
+              >
+                {navItems.map((item) => (
+                  <a
+                    key={item}
+                    href={`#${item.toLowerCase()}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-3xl font-bold text-primary-container hover:text-yellow-300 transition"
+                  >
+                    {item}
+                  </a>
+                ))}
+
+                <CastSpellButton className="mt-10 px-8 py-4 rounded-xl text-lg">
+                  Cast Your Spell
+                </CastSpellButton>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-margin-mobile md:px-margin-desktop overflow-hidden">
-          <div className="absolute inset-0 z-[-1] pointer-events-none">
+        <section
+          ref={heroRef}
+          className={`relative min-h-screen flex items-center justify-center pt-28 pb-16 px-margin-mobile md:px-margin-desktop overflow-hidden
+            relative min-h-screen transition-all duration-75 ${flash ? "brightness-125 contrast-125 saturate-110" : ""
+            }`}
+        >
+          {/* Background */}
+          <div className="absolute inset-0 z-[-2] pointer-events-none">
             <img
-              className="w-full h-full object-cover opacity-35"
+              className="w-full h-full object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7N_hX_44CP9l53dwLxQmPCbBEH0fICJT8gVCEsmJP-npDUrKimVGADxSualIkiThpPvmv6Sk_NuX_m8WbU71nZY5PB9QZahxWNivPqp8KAXCMoH1IEhcKIiQL4SKPiq4vbFtTYTPblEq_xQFIBgT8B7BiCx5Pr0EVQDqQlWNFZ5wqQZbhLgKfBHtwuabB46y_OHRo9IdYfUKhxvKOaLwNN0pnLEofBAW8EGZYl4a8vtx4Z6WLnuwyQl8ZXXL7LT5sHuqR9fffB5s"
               alt="Magical Background"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background"></div>
           </div>
+          <div
+            className={`absolute inset-0 pointer-events-none transition-opacity duration-100 ${flash ? "opacity-100" : "opacity-0"
+              }`}
+            style={{
+              background: "rgba(255, 255, 255, 0.3)",
+              mixBlendMode: "screen",
+            }}
+          />
+
+          <div
+            className="absolute inset-0 z-[-1] pointer-events-none transition-all duration-100"
+            style={{
+              background: flash
+                ? "rgba(0,0,0,0.05)"
+                : `
+        radial-gradient(
+          ellipse 320px 270px at var(--x,50%) var(--y,50%),
+          rgba(0,0,0,0) 0%,
+          rgba(0,0,0,0.02) 20%,
+          rgba(0,0,0,0.06) 35%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.25) 70%,
+          rgba(0,0,0,0.45) 85%,
+          rgba(0,0,0,0.65) 100%
+        )
+      `,
+            }}
+          />
+          {/* Existing bottom gradient */}
+          <div className="absolute inset-0 z-[-1] pointer-events-none bg-gradient-to-b from-transparent via-background/30 to-background" />
+
+          {/* Hero Content */}
           <div className="text-center z-10 max-w-4xl mx-auto flex flex-col items-center gap-8">
-            <h1 className="font-harry-potter text-5xl md:text-7xl text-primary drop-shadow-[0_0_20px_rgba(255,215,0,0.3)]">
-              INCEPTIA HACKATHON 2026
+            <h1 className={`font-harry-potter text-5xl md:text-7xl text-primary drop-shadow-[0_0_20px_rgba(255,215,0,0.3)]
+              transition-all duration-150 ${flash
+                ? "brightness-125 drop-shadow-[0_0_30px_white]"
+                : ""
+              }`}>
+              INCEPTIA HACKATHON{" "}
+              <span className="font-parry-hotter text-8xl">2026</span>
             </h1>
+
             <p className="font-headline-md text-xl md:text-2xl text-tertiary-fixed max-w-2xl px-4">
-              Where Magic Meets Code. Collaborate, innovate, and brew powerful solutions in a 24-hour coding challenge. Whatever it takes.
+              Join Earth's Mightiest Developers! Collaborate, innovate, and compete in
+              a coding challenge worthy of heroes.
+              <span className="text-error"> Whatever it takes.</span>
             </p>
-            <CastSpellButton className="bg-gradient-to-r from-primary-container to-secondary text-on-primary font-label-md text-label-md px-10 py-5 rounded-lg text-lg uppercase tracking-widest font-bold">
+
+            {/* <CastSpellButton className="bg-gradient-to-r from-primary-container to-secondary text-on-primary font-label-md text-label-md px-10 py-5 rounded-lg text-lg uppercase tracking-widest font-bold">
               Cast Your Spell (Register Now)
-            </CastSpellButton>
+            </CastSpellButton> */}
 
             <div className="flex flex-wrap justify-center gap-8 mt-12 w-full max-w-3xl px-4">
               <div
                 className="glass-card p-6 rounded-xl flex-1 min-w-[200px] text-center float-anim"
                 style={{ animationDelay: "0s" }}
               >
-                <div className="font-headline-lg text-5xl text-primary-container font-bold">24</div>
+                <div className="font-headline-lg text-5xl text-primary-container font-bold">
+                  24
+                </div>
                 <div className="font-label-md text-label-md text-on-surface-variant mt-2 uppercase tracking-wide">
                   Hours of Hacking
                 </div>
               </div>
+
               <div
                 className="glass-card p-6 rounded-xl flex-1 min-w-[200px] text-center float-anim"
                 style={{ animationDelay: "1s" }}
               >
-                <div className="font-headline-lg text-5xl text-primary-container font-bold">₹50k+</div>
+                <div className="font-headline-lg text-5xl text-primary-container font-bold">
+                  ₹50k+
+                </div>
                 <div className="font-label-md text-label-md text-on-surface-variant mt-2 uppercase tracking-wide">
                   Prize Pool
                 </div>
               </div>
+
               <div
                 className="glass-card p-6 rounded-xl flex-1 min-w-[200px] text-center float-anim"
                 style={{ animationDelay: "2s" }}
               >
-                <div className="font-headline-lg text-5xl text-primary-container font-bold">400+</div>
+                <div className="font-headline-lg text-5xl text-primary-container font-bold">
+                  400+
+                </div>
                 <div className="font-label-md text-label-md text-on-surface-variant mt-2 uppercase tracking-wide">
                   Wizards Assembled
                 </div>
@@ -493,37 +812,41 @@ export default function Home() {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
               <DomainCard
-                icon="psychology"
-                title="AI/ML"
-                description="Brew intelligent models to solve complex real-world challenges."
+                icon="smart_toy"
+                title="Artificial Intelligence & Machine Learning (AI Agents)"
+                description="Build intelligent AI systems, autonomous agents, and data-driven solutions that solve complex real-world challenges through machine learning and automation."
                 shouldReduce={shouldReduce}
                 variants={itemVariants}
               />
+
               <DomainCard
-                icon="currency_bitcoin"
-                title="Web3"
-                description="Cast decentralized protocols and configure robust secure architectures."
+                icon="account_balance_wallet"
+                title="Web3 (Blockchain) & Fintech"
+                description="Develop decentralized applications, blockchain solutions, smart contracts, and next-generation financial technologies that redefine digital trust and transactions."
                 shouldReduce={shouldReduce}
                 variants={itemVariants}
               />
+
               <DomainCard
                 icon="health_and_safety"
                 title="Healthcare"
-                description="Design healing potions and technical innovations to enhance patient care."
+                description="Create innovative technologies that improve patient care, diagnostics, medical accessibility, and healthcare management through digital transformation."
                 shouldReduce={shouldReduce}
                 variants={itemVariants}
               />
+
               <DomainCard
                 icon="school"
                 title="Education"
-                description="Reimagine learning experiences and make universal knowledge accessible."
+                description="Reimagine learning with interactive platforms, AI-powered education, and accessible technologies that empower learners across the globe."
                 shouldReduce={shouldReduce}
                 variants={itemVariants}
               />
+
               <DomainCard
-                icon="lightbulb"
+                icon="auto_awesome"
                 title="Open Innovation"
-                description="An open canvas for any visionary, magical technology concept."
+                description="Have a groundbreaking idea beyond conventional domains? Bring your bold vision to life with complete creative freedom."
                 shouldReduce={shouldReduce}
                 variants={itemVariants}
               />
@@ -532,56 +855,62 @@ export default function Home() {
         </section>
 
         {/* Timeline Section */}
-        <section className="py-24 px-margin-mobile md:px-margin-desktop relative" id="timeline">
-          <div className="max-w-4xl mx-auto">
+        {/* Timeline Section */}
+        <section
+          className="py-24 px-margin-mobile md:px-margin-desktop relative"
+          id="timeline"
+        >
+          <div className="max-w-6xl mx-auto">
             <h2 className="font-display-lg text-4xl md:text-5xl text-primary-container text-center mb-16 italic">
-              The Marauder's Map (Event Schedule)
+              The Marauder&apos;s Map (Event Schedule)
             </h2>
-            <div className="relative parchment-timeline py-8">
-              <div className="relative z-10 flex flex-col gap-16">
-                <TimelineNode
-                  time="15TH MAY 2026"
-                  title="Sorting Hat Ceremony"
-                  subtitle="Event Live on Unstop"
-                  alignRight={false}
-                  delay={0}
-                  shouldReduce={shouldReduce}
-                />
-                <TimelineNode
-                  time="25TH MAY - 7TH JUN 2026"
-                  title="Spell Submission"
-                  subtitle="Online Registrations"
-                  alignRight={true}
-                  delay={0.5}
-                  shouldReduce={shouldReduce}
-                />
-                <TimelineNode
-                  time="8TH JUNE 2026"
-                  title="The Prophet's Announcement"
-                  subtitle="Shortlisted Teams Announcement"
-                  alignRight={false}
-                  delay={1.0}
-                  shouldReduce={shouldReduce}
-                />
-                <TimelineNode
-                  time="4TH & 5TH JULY 2026"
-                  title="The Grand Sorcery"
-                  subtitle="Offline Hackathon at PCCOER Campus, Ravet, Pune"
-                  alignRight={true}
-                  delay={1.5}
-                  shouldReduce={shouldReduce}
-                />
-              </div>
+
+            <div className="relative flex justify-center">
+              <Image
+                src="/Timeline.png"
+                alt="INCEPTIA 2K26 Event Timeline"
+                width={900}
+                height={400}
+                className="w-1/2 h-auto object-contain"
+                priority
+              />
             </div>
           </div>
         </section>
 
         {/* Prizes Section */}
-        <section className="py-24 px-margin-mobile md:px-margin-desktop relative" id="prizes">
-          <div className="max-w-container-max mx-auto" ref={prizesRef}>
-            <h2 className="font-display-lg text-4xl md:text-5xl text-primary-container text-center mb-20 font-bold">
-              The Triwizard Rewards
+        <section
+          id="prizes"
+          className="relative py-28 overflow-hidden px-margin-mobile md:px-margin-desktop"
+        >
+          {/* Magical Background */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute left-20 top-20 w-56 h-56 rounded-full bg-yellow-400/10 blur-[120px]" />
+            <div className="absolute right-20 bottom-20 w-72 h-72 rounded-full bg-purple-600/10 blur-[140px]" />
+
+            <span className="absolute left-16 top-32 material-symbols-outlined text-yellow-300/20 text-5xl animate-pulse">
+              auto_awesome
+            </span>
+
+            <span className="absolute right-20 top-44 material-symbols-outlined text-yellow-200/20 text-4xl animate-pulse delay-300">
+              stars
+            </span>
+
+            <span className="absolute left-1/2 bottom-20 material-symbols-outlined text-yellow-300/20 text-6xl animate-pulse delay-700">
+              flare
+            </span>
+          </div>
+
+          <div className="max-w-7xl mx-auto relative z-10">
+
+            <h2 className="text-center text-5xl md:text-6xl font-bold text-primary-container mb-5">
+              The Wizard's Treasure Vault
             </h2>
+
+            <p className="max-w-2xl mx-auto text-center text-on-surface-variant mb-20">
+              Only the finest innovators shall unlock the enchanted rewards hidden
+              within the ancient vault.
+            </p>
 
             <motion.div
               style={
@@ -592,38 +921,100 @@ export default function Home() {
                     translateZ: springTranslateZ,
                     opacity: springOpacity,
                     transformStyle: "preserve-3d",
-                    perspective: 1000,
                   }
               }
-              className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end preserve-3d"
+              className="grid md:grid-cols-3 gap-10 items-end"
             >
-              {/* 2nd Place */}
-              <div className="bg-surface-container p-6 rounded-xl prize-border text-center order-2 md:order-1 h-64 flex flex-col justify-end transform hover:-translate-y-3 transition duration-300">
-                <span className="material-symbols-outlined text-5xl text-outline mb-4 select-none">military_tech</span>
-                <h3 className="font-headline-md text-xl text-primary mb-2">2nd Place</h3>
-                <p className="font-display-lg text-3xl text-primary-container mb-2 font-bold">₹15,000</p>
-                <p className="font-body-md text-on-surface-variant font-medium">+ Cool Gadgets</p>
+
+              {/* ================= SECOND ================= */}
+
+              <div className="relative rounded-3xl border border-slate-400/30 bg-slate-900/60 backdrop-blur-xl p-8 text-center h-[420px] flex flex-col justify-end shadow-[0_0_40px_rgba(220,220,220,.12)] transition duration-500 hover:-translate-y-4">
+
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-white/5 to-transparent" />
+
+                <span className="material-symbols-outlined text-6xl text-slate-300 mb-5">
+                  workspace_premium
+                </span>
+
+                <h3 className="text-2xl font-bold text-white mb-2">
+                  Runner-Up
+                </h3>
+
+                <p className="text-5xl font-black text-slate-200">
+                  ₹15,000
+                </p>
+
+                <div className="mt-8 space-y-2 text-slate-300">
+                  <p>🏅 Magical Medal</p>
+                  <p>📜 Certificate</p>
+                  <p>🎁 Exclusive Swag</p>
+                </div>
+
               </div>
 
-              {/* 1st Place */}
-              <div className="bg-surface-container p-8 rounded-xl prize-border text-center order-1 md:order-2 h-80 flex flex-col justify-end transform md:-translate-y-8 hover:-translate-y-12 transition duration-300 shadow-[0_0_40px_rgba(255,215,0,0.15)] relative">
-                {/* Visual Glow behind 1st place */}
-                <div className="absolute inset-0 bg-primary-container/5 rounded-xl blur-lg pointer-events-none" />
-                <span className="material-symbols-outlined text-6xl text-primary-container mb-4 select-none animate-pulse">
+              {/* ================= FIRST ================= */}
+
+              <div className="relative rounded-[32px] border border-yellow-400/50 bg-gradient-to-b from-yellow-500/15 via-black/40 to-black/70 backdrop-blur-xl p-10 text-center h-[520px] flex flex-col justify-end shadow-[0_0_90px_rgba(255,215,0,.25)] hover:scale-105 transition duration-500 md:-translate-y-10 overflow-hidden">
+
+                {/* Glow */}
+                <div className="absolute inset-0 bg-yellow-300/10 blur-3xl animate-pulse" />
+
+                {/* Floating stars */}
+                <span className="absolute top-8 left-8 material-symbols-outlined text-yellow-300 animate-pulse">
+                  auto_awesome
+                </span>
+
+                <span className="absolute right-8 top-16 material-symbols-outlined text-yellow-300 animate-pulse delay-500">
+                  stars
+                </span>
+
+                <span className="material-symbols-outlined text-8xl text-yellow-300 drop-shadow-[0_0_20px_rgba(255,215,0,.9)] mb-8">
                   emoji_events
                 </span>
-                <h3 className="font-headline-md text-2xl text-primary mb-2 font-semibold">1st Place</h3>
-                <p className="font-display-lg text-4xl text-primary-container mb-2 font-bold">₹25,000</p>
-                <p className="font-body-md text-on-surface-variant font-medium">+ Winner Medals</p>
+
+                <h3 className="text-3xl font-bold text-yellow-100 mb-3">
+                  Grand Champion
+                </h3>
+
+                <p className="text-7xl font-black text-yellow-300">
+                  ₹25,000
+                </p>
+
+                <div className="mt-8 space-y-3 text-yellow-50">
+                  <p>🏆 Champion Trophy</p>
+                  <p>🎖️ Winner Certificate</p>
+                  <p>💼 Internship Opportunities</p>
+                  <p>🎁 Premium Goodies</p>
+                </div>
+
               </div>
 
-              {/* 3rd Place */}
-              <div className="bg-surface-container p-6 rounded-xl prize-border text-center order-3 md:order-3 h-56 flex flex-col justify-end transform hover:-translate-y-3 transition duration-300">
-                <span className="material-symbols-outlined text-5xl text-outline-variant mb-4 select-none">military_tech</span>
-                <h3 className="font-headline-md text-xl text-primary mb-2">3rd Place</h3>
-                <p className="font-display-lg text-2xl text-primary-container mb-2 font-bold">₹10,000</p>
-                <p className="font-body-md text-on-surface-variant font-medium">+ Exclusive Goodies</p>
+              {/* ================= THIRD ================= */}
+
+              <div className="relative rounded-3xl border border-amber-700/40 bg-amber-950/40 backdrop-blur-xl p-8 text-center h-[390px] flex flex-col justify-end shadow-[0_0_35px_rgba(180,120,60,.18)] transition duration-500 hover:-translate-y-4">
+
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-amber-500/5 to-transparent" />
+
+                <span className="material-symbols-outlined text-6xl text-amber-500 mb-5">
+                  diamond
+                </span>
+
+                <h3 className="text-2xl font-bold text-amber-200 mb-2">
+                  Second Runner-Up
+                </h3>
+
+                <p className="text-5xl font-black text-amber-400">
+                  ₹10,000
+                </p>
+
+                <div className="mt-8 space-y-2 text-amber-200">
+                  <p>🎖️ Medal</p>
+                  <p>📜 Certificate</p>
+                  <p>🎁 Magical Merchandise</p>
+                </div>
+
               </div>
+
             </motion.div>
           </div>
         </section>
