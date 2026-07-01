@@ -1,120 +1,120 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'HarryPotter';
-  src: url('/fonts/HarryPotter-ov4z.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'HarryPotter';
+    src: url('/fonts/HarryPotter-ov4z.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'ParryHotter';
-  src: url('/fonts/ParryHotter.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'ParryHotter';
+    src: url('/fonts/ParryHotter.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'HarryPotterBold';
-  src: url('/fonts/HARRYP__.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'HarryPotterBold';
+    src: url('/fonts/HARRYP__.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'DragonHunter';
-  src: url('/fonts/DragonHunter-9Ynxj.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'DragonHunter';
+    src: url('/fonts/DragonHunter-9Ynxj.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'GotikaBlack';
-  src: url('/fonts/GotikaBlackPersonalUseRegular-3zvY3.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'GotikaBlack';
+    src: url('/fonts/GotikaBlackPersonalUseRegular-3zvY3.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
 }
 
 @theme {
-  --color-surface-container-high: #2a2a2a;
-  --color-primary-container: #ffd700;
-  --color-primary-fixed: #ffe16d;
-  --color-on-error: #690005;
-  --color-secondary: #ffb77d;
-  --color-surface-dim: #131313;
-  --color-tertiary-fixed-dim: #fbb980;
-  --color-on-primary-container: #705e00;
-  --color-tertiary-fixed: #ffdcc1;
-  --color-inverse-on-surface: #313030;
-  --color-on-tertiary-container: #855324;
-  --color-on-secondary-fixed: #2f1500;
-  --color-on-secondary: #4d2600;
-  --color-tertiary: #fff4ee;
-  --color-on-error-container: #ffdad6;
-  --color-outline-variant: #4d4732;
-  --color-error: #ffb4ab;
-  --color-background: #131313;
-  --color-surface-container: #201f1f;
-  --color-on-surface: #e5e2e1;
-  --color-surface-variant: #353534;
-  --color-on-tertiary: #4c2700;
-  --color-on-tertiary-fixed-variant: #693c0e;
-  --color-surface: #131313;
-  --color-surface-container-highest: #353534;
-  --color-surface-container-lowest: #0e0e0e;
-  --color-outline: #999077;
-  --color-on-surface-variant: #d0c6ab;
-  --color-tertiary-container: #ffd1ac;
-  --color-on-background: #e5e2e1;
-  --color-on-secondary-fixed-variant: #6e3900;
-  --color-on-tertiary-fixed: #2e1500;
-  --color-inverse-primary: #705d00;
-  --color-on-primary: #3a3000;
-  --color-inverse-surface: #e5e2e1;
-  --color-on-primary-fixed-variant: #544600;
-  --color-secondary-fixed-dim: #ffb77d;
-  --color-surface-container-low: #1c1b1b;
-  --color-surface-bright: #393939;
-  --color-on-secondary-container: #603100;
-  --color-on-primary-fixed: #221b00;
-  --color-secondary-fixed: #ffdcc3;
-  --color-secondary-container: #fd8b00;
-  --color-primary: #fff6df;
-  --color-surface-tint: #e9c400;
-  --color-error-container: #93000a;
-  --color-primary-fixed-dim: #e9c400;
+    --color-surface-container-high: #2a2a2a;
+    --color-primary-container: #ffd700;
+    --color-primary-fixed: #ffe16d;
+    --color-on-error: #690005;
+    --color-secondary: #ffb77d;
+    --color-surface-dim: #131313;
+    --color-tertiary-fixed-dim: #fbb980;
+    --color-on-primary-container: #705e00;
+    --color-tertiary-fixed: #ffdcc1;
+    --color-inverse-on-surface: #313030;
+    --color-on-tertiary-container: #855324;
+    --color-on-secondary-fixed: #2f1500;
+    --color-on-secondary: #4d2600;
+    --color-tertiary: #fff4ee;
+    --color-on-error-container: #ffdad6;
+    --color-outline-variant: #4d4732;
+    --color-error: #ffb4ab;
+    --color-background: #131313;
+    --color-surface-container: #201f1f;
+    --color-on-surface: #e5e2e1;
+    --color-surface-variant: #353534;
+    --color-on-tertiary: #4c2700;
+    --color-on-tertiary-fixed-variant: #693c0e;
+    --color-surface: #131313;
+    --color-surface-container-highest: #353534;
+    --color-surface-container-lowest: #0e0e0e;
+    --color-outline: #999077;
+    --color-on-surface-variant: #d0c6ab;
+    --color-tertiary-container: #ffd1ac;
+    --color-on-background: #e5e2e1;
+    --color-on-secondary-fixed-variant: #6e3900;
+    --color-on-tertiary-fixed: #2e1500;
+    --color-inverse-primary: #705d00;
+    --color-on-primary: #3a3000;
+    --color-inverse-surface: #e5e2e1;
+    --color-on-primary-fixed-variant: #544600;
+    --color-secondary-fixed-dim: #ffb77d;
+    --color-surface-container-low: #1c1b1b;
+    --color-surface-bright: #393939;
+    --color-on-secondary-container: #603100;
+    --color-on-primary-fixed: #221b00;
+    --color-secondary-fixed: #ffdcc3;
+    --color-secondary-container: #fd8b00;
+    --color-primary: #fff6df;
+    --color-surface-tint: #e9c400;
+    --color-error-container: #93000a;
+    --color-primary-fixed-dim: #e9c400;
 
-  --spacing-container-max: 1280px;
-  --spacing-unit: 8px;
-  --spacing-margin-mobile: 20px;
-  --spacing-margin-desktop: 64px;
-  --spacing-gutter: 24px;
+    --spacing-container-max: 1280px;
+    --spacing-unit: 8px;
+    --spacing-margin-mobile: 20px;
+    --spacing-margin-desktop: 64px;
+    --spacing-gutter: 24px;
 
-  --font-harry-potter-bold: "HarryPotterBold", sans-serif;
-  --font-parry-hotter: "ParryHotter", sans-serif;
-  --font-harry-potter: "HarryPotter", sans-serif;
-  --font-dragon-hunter: "DragonHunter", sans-serif;
-  --font-gotika: "GotikaBlack", sans-serif;
-  --font-gotika-bold: "GotikaBlackBold", sans-serif;
+    --font-harry-potter-bold: "HarryPotterBold", sans-serif;
+    --font-parry-hotter: "ParryHotter", sans-serif;
+    --font-harry-potter: "HarryPotter", sans-serif;
+    --font-dragon-hunter: "DragonHunter", sans-serif;
+    --font-gotika: "GotikaBlack", sans-serif;
+    --font-gotika-bold: "GotikaBlackBold", sans-serif;
 
-  --font-body-md: var(--font-inter), sans-serif;
-  --font-headline-lg: var(--font-dragon-hunter), sans-serif;
-  --font-headline-lg-mobile: var(--font-dragon-hunter), sans-serif;
-  --font-body-lg: var(--font-inter), sans-serif;
-  --font-label-md: var(--font-inter), sans-serif;
-  --font-headline-md: var(--font-dragon-hunter), sans-serif;
-  --font-display-lg: var(--font-dragon-hunter), sans-serif;
+    --font-body-md: var(--font-inter), sans-serif;
+    --font-headline-lg: var(--font-dragon-hunter), sans-serif;
+    --font-headline-lg-mobile: var(--font-dragon-hunter), sans-serif;
+    --font-body-lg: var(--font-inter), sans-serif;
+    --font-label-md: var(--font-inter), sans-serif;
+    --font-headline-md: var(--font-dragon-hunter), sans-serif;
+    --font-display-lg: var(--font-dragon-hunter), sans-serif;
 }
 
 @media (pointer: fine) {
-  * {
-    cursor: none;
-  }
+    * {
+        cursor: none;
+    }
 }
 
 /* Base Headings Style */
@@ -123,168 +123,115 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-dragon-hunter), sans-serif;
+    font-family: var(--font-dragon-hunter), sans-serif;
 }
 
 
 /* Custom styles and keyframes */
 .pulse-gold {
-  animation: pulseGold 2s infinite;
+    animation: pulseGold 2s infinite;
 }
 
 @keyframes pulseGold {
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4);
-  }
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4);
+    }
 
-  70% {
-    box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
-  }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
+    }
 
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
-  }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+    }
 }
 
 .float-anim {
-  animation: float 6s ease-in-out infinite;
+    animation: float 6s ease-in-out infinite;
 }
 
 @keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
+    0% {
+        transform: translateY(0px);
+    }
 
-  50% {
-    transform: translateY(-10px);
-  }
+    50% {
+        transform: translateY(-10px);
+    }
 
-  100% {
-    transform: translateY(0px);
-  }
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 .glass-card {
-  background: rgba(18, 18, 18, 0.7);
-  backdrop-filter: blur(10px);
-  border-top: 2px solid #ffd700;
-  box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.05);
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(10px);
+    border-top: 2px solid #ffd700;
+    box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.05);
 }
 
 .parchment-timeline::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: #d0c6ab;
-  transform: translateX(-50%);
-  opacity: 0.3;
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: #d0c6ab;
+    transform: translateX(-50%);
+    opacity: 0.3;
 }
 
 .footprints {
-  animation: footprintsAnim 2s infinite alternate ease-in-out;
+    animation: footprintsAnim 2s infinite alternate ease-in-out;
 }
 
 @keyframes footprintsAnim {
-  0% {
-    opacity: 0.2;
-    transform: translateY(0);
-  }
+    0% {
+        opacity: 0.2;
+        transform: translateY(0);
+    }
 
-  100% {
-    opacity: 0.8;
-    transform: translateY(10px);
-  }
+    100% {
+        opacity: 0.8;
+        transform: translateY(10px);
+    }
 }
 
 .prize-border {
-  border: 2px solid transparent;
-  border-image: linear-gradient(to bottom right, #e5e2e1, #ffd700, #4d4732) 1;
+    border: 2px solid transparent;
+    border-image: linear-gradient(to bottom right, #e5e2e1, #ffd700, #4d4732) 1;
 }
 
 /* 3D Perspective setup classes */
 .perspective-1000 {
-  perspective: 1000px;
+    perspective: 1000px;
 }
 
 .preserve-3d {
-  transform-style: preserve-3d;
+    transform-style: preserve-3d;
 }
 
 .backface-hidden {
-  backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 /* Custom Scrollbar for magical theme */
 ::-webkit-scrollbar {
-  width: 10px;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #131313;
+    background: #131313;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ffd700;
-  border-radius: 5px;
-  border: 2px solid #131313;
+    background: #ffd700;
+    border-radius: 5px;
+    border: 2px solid #131313;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ffe16d;
+    background: #ffe16d;
 }
-
-/* ─── Timeline Nodes ──────────────────────────────────────────────────── */
-.timeline-node {
-  position: relative;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 215, 0, 0.35);
-  background: rgba(10, 8, 20, 0.55);
-  backdrop-filter: blur(6px);
-  box-shadow:
-    0 0 0 0 rgba(255, 215, 0, 0.25),
-    inset 0 0 8px rgba(255, 215, 0, 0.08);
-  animation: nodeBreath 3s ease-in-out infinite;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.timeline-node-inner {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 215, 0, 0.55);
-  box-shadow: 0 0 6px 2px rgba(255, 215, 0, 0.3);
-}
-
-@keyframes nodeBreath {
-  0%, 100% {
-    box-shadow:
-      0 0 0 0 rgba(255, 215, 0, 0.25),
-      inset 0 0 8px rgba(255, 215, 0, 0.08);
-    border-color: rgba(255, 215, 0, 0.3);
-  }
-  50% {
-    box-shadow:
-      0 0 14px 4px rgba(255, 215, 0, 0.12),
-      inset 0 0 12px rgba(255, 215, 0, 0.12);
-    border-color: rgba(255, 215, 0, 0.55);
-  }
-}
-
-.timeline-card {
-  background: rgba(8, 6, 18, 0.52);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 215, 0, 0.12);
-  border-top: 2px solid rgba(255, 215, 0, 0.32);
-  border-radius: 8px;
-  box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.45),
-    inset 0 0 16px rgba(255, 215, 0, 0.025);
-}
-
