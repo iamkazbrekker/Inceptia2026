@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚡ Inceptia 2K26
 
-## Getting Started
+Welcome to the official repository for **Inceptia 2026**, the magical, Harry Potter-themed offline hackathon hosted at PCCOER Campus, Ravet, Pune!
 
-First, run the development server:
+## 🪄 The Magic Within
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The website is designed with a premium, luxury golden aesthetic inspired by the Wizarding World. It features glassmorphism, dynamic animations, and an immersive Marauder's Map timeline.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### ✨ Features
+- **Magical Hero Section**: A stunning golden "INCEPTIA 2K26" glowing logo with a real-time countdown timer to the event.
+- **Marauder's Timeline**: A fully custom-drawn, animated timeline tracking the event phases (Registration, Submission, Offline Hackathon) featuring sketched castles, forbidden forests, and wandering footprints.
+- **Domain Emblems**: Five distinct hackathon domains (AI & ML, Web3, Healthcare, Education, Open Innovation) showcased in beautifully crafted, glowing glass spheres with perfectly transparent magical emblems.
+- **Wand Cursor**: A custom wand cursor that precisely follows your mouse for a fully immersive wizarding experience.
+- **Dynamic Marquee**: A seamless infinite-looping magical text marquee.
+- **Premium Aesthetics**: Built with Next.js, Tailwind CSS, and Framer Motion, utilizing deep dark backgrounds, pure gold gradients, and `backdrop-blur` glass effects.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Technology Stack
+- **Framework**: Next.js (React)
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Icons & Assets**: Custom SVG Vectors & CSS `mix-blend-mode` magic
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Running Locally
 
-## Learn More
+To run the magic on your local machine:
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Kalash-B/Inceptia2026.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to enter the wizarding world!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🏰 Event Details
+- **Online Registrations Deadline**: 18 July 2026
+- **PPT Submission Deadline**: 23 July 2026
+- **Shortlisted Teams Announcement**: 25 July 2026
+- **Offline Hackathon**: 7th & 8th August 2026
+- **Location**: PCCOER Campus, Ravet, Pune
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Mischief Managed.*
