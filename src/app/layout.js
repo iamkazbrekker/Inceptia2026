@@ -1,6 +1,5 @@
 import { Inter, Noto_Serif } from "next/font/google";
 import "./globals.css";
-import WandCursor from "./components/WandCursor";
 
 const inter = Inter({
   variable: "--font-inter",
