@@ -1,8 +1,8 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
 import WandCursor from "./components/wandCursor";
 import MagicalClouds from "./components/magicalClouds";
 import Countdown from "./components/countdown";
