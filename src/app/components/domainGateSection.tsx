@@ -243,7 +243,7 @@ export default function DomainGateSection() {
               </clipPath>
             </defs>
             <foreignObject x="0" y="0" width="700" height="420" clipPath="url(#left-gate-clip)">
-              <div xmlns="http://www.w3.org/1999/xhtml" className="w-full h-full bg-white/5 backdrop-blur-md" />
+              <div className="w-full h-full bg-white/5 backdrop-blur-md" />
             </foreignObject>
             <path
               d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z"
@@ -265,7 +265,7 @@ export default function DomainGateSection() {
               </clipPath>
             </defs>
             <foreignObject x="0" y="0" width="700" height="420" clipPath="url(#right-gate-clip)">
-              <div xmlns="http://www.w3.org/1999/xhtml" className="w-full h-full bg-white/5 backdrop-blur-md" />
+              <div className="w-full h-full bg-white/5 backdrop-blur-md" />
             </foreignObject>
             <path
               d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z"
