@@ -19,7 +19,7 @@ export default function AboutSection() {
           About Inceptia 2K26
         </h2>
         
-        <div className="glass-morphic p-8 md:p-14 rounded-[2rem] border border-yellow-500/20 bg-black/40 backdrop-blur-xl shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
+        <div className="glass-morphic p-8 md:p-14 rounded-[2rem] border border-yellow-500/20 bg-gradient-to-b from-transparent via-yellow-900/10 to-transparent backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
           <p className="text-lg md:text-2xl text-gray-200 leading-relaxed font-body-lg mb-6">
             Inceptia 2K26 is the premier 24-hour national level hackathon where magic meets technology. 
             We aim to foster innovation, collaboration, and rapid prototyping among the brightest minds across the country.

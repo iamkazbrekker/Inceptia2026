@@ -132,61 +132,41 @@ function Page() {
         {/* Custom Magic Wand Cursor */}
         <WandCursor />
 
-        {/* Magical Marquee (Perfect Loop) */}
-        <div className="absolute top-0 left-0 w-full bg-yellow-500/5 backdrop-blur-md border-b border-yellow-500/20 overflow-hidden z-[100] py-2.5 flex items-center shadow-[0_4px_30px_rgba(255,215,0,0.1)]">
-          <div className="flex animate-marquee min-w-max">
-            {/* First Block */}
-            <div className="flex gap-12 pr-12 text-[10px] sm:text-xs font-bold text-yellow-100 tracking-widest uppercase whitespace-nowrap">
-              <span>✦ REGISTRATIONS OPEN ✦</span>
-              <span>✦ EARLY BIRD REWARDS ✦</span>
-              <span>✦ PRIZE POOL EXCEEDS ₹50,000 ✦</span>
-              <span>✦ MAGICAL WORKSHOPS ✦</span>
-              <span>✦ 24-HOUR HACKATHON ✦</span>
-            </div>
-            {/* Duplicate Block for Loop */}
-            <div className="flex gap-12 pr-12 text-[10px] sm:text-xs font-bold text-yellow-100 tracking-widest uppercase whitespace-nowrap">
-              <span>✦ REGISTRATIONS OPEN ✦</span>
-              <span>✦ EARLY BIRD REWARDS ✦</span>
-              <span>✦ PRIZE POOL EXCEEDS ₹50,000 ✦</span>
-              <span>✦ MAGICAL WORKSHOPS ✦</span>
-              <span>✦ 24-HOUR HACKATHON ✦</span>
-            </div>
-          </div>
-        </div>
-
         {/* 1. Hero Section */}
-        <div className="w-full h-screen snap-start snap-always shrink-0 overflow-hidden flex flex-col justify-center items-center relative z-10">
-          <section className="relative w-full flex flex-col items-center justify-center text-center px-4 md:px-12 py-12">
+        <div className="w-full h-screen snap-start snap-always shrink-0 overflow-hidden flex flex-col justify-center items-start relative z-10">
+          <section className="relative w-full flex flex-col items-start justify-center text-left px-8 md:px-24 py-12">
             {/* Hero Content */}
             <motion.div
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="max-w-4xl flex flex-col items-center justify-center gap-6 mt-12 w-full"
+              className="max-w-4xl flex flex-col items-start justify-center gap-6 mt-12 w-full"
             >
               {/* Logo / Title animation */}
-              <motion.div variants={itemVariants} className="text-center mb-6 pt-10">
+              <motion.div variants={itemVariants} className="text-left mb-6 pt-10">
                 <h1
-                  className="font-harry-potter text-7xl sm:text-8xl md:text-[140px] text-white select-none italic pt-4 leading-tight animate-[pulse_3s_ease-in-out_infinite]"
+                  className="font-harry-potter text-7xl sm:text-8xl md:text-[140px] text-white select-none italic pt-4 leading-tight"
                   style={{
                     fontWeight: "bold",
                     textShadow: "0 0 20px rgba(255,215,0,0.6), 0 0 40px rgba(255,215,0,0.4), 0 0 80px rgba(255,215,0,0.2)"
                   }}
                 >
-                  INCEPTIA <br /> 2K26
+                  INCEPTIA <br /> HACKATHON
                 </h1>
               </motion.div>
 
               {/* Event Date injected between timer and logo */}
               <motion.div variants={itemVariants} className="mb-4">
-                <span className="text-yellow-400 font-bold tracking-[0.2em] uppercase text-sm md:text-xl drop-shadow-[0_0_10px_rgba(255,215,0,0.5)] bg-black/40 px-6 py-2 rounded-full border border-yellow-500/20">
-                  7TH AUG &ndash; 8TH AUG 2026
+                <span className="text-yellow-400 font-bold tracking-[0.2em] uppercase text-sm md:text-xl drop-shadow-[0_0_10px_rgba(255,215,0,0.5)] bg-black/40 px-6 py-2 rounded-full border border-yellow-500/20 inline-block">
+                  Organised by ITSA
                 </span>
               </motion.div>
 
-              <motion.div variants={itemVariants} className="w-full mb-8">
-                <Countdown />
-              </motion.div>
+              {/* <motion.div variants={itemVariants} className="w-full mb-8 flex justify-start">
+                <div className="scale-90 origin-left md:scale-100">
+                  <Countdown />
+                </div>
+              </motion.div> */}
 
               {/* Golden Register Button with high click priority */}
               <motion.div variants={itemVariants} className="relative z-50 pointer-events-auto">
@@ -217,17 +197,17 @@ function Page() {
         </div>
 
         {/* 4. Timeline Section */}
-        <div className="w-full h-screen snap-start snap-always shrink-0 overflow-hidden flex items-center justify-center relative z-10">
+        <div className="w-full min-h-screen h-auto snap-start snap-always shrink-0 flex items-center justify-center relative z-10 bg-black/20">
           <TimelineSection />
         </div>
 
         {/* 5. Prize Pool Section */}
-        <div className="w-full h-screen snap-start snap-always shrink-0 overflow-hidden flex items-center justify-center relative z-10">
+        <div className="w-full min-h-screen h-auto snap-start snap-always shrink-0 flex items-center justify-center relative z-10">
           <PrizesSection />
         </div>
 
         {/* 6. Sponsors Section */}
-        <div className="w-full h-screen snap-start snap-always shrink-0 overflow-hidden flex items-center justify-center relative z-10">
+        <div className="w-full min-h-screen h-auto snap-start snap-always shrink-0 flex items-center justify-center relative z-10">
           <SponsorsSection />
         </div>
 
