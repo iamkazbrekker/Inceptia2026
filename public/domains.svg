@@ -1,0 +1,63 @@
+<svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg">
+
+<!--
+============================================================
+PARAMETERS
+============================================================
+
+x0 = 90
+y0 = 50
+
+W = 500
+H = 290
+
+R = 45
+
+curveStartX = 520
+curveEndX   = 330
+curveEndY   = 340
+
+Bezier controls:
+c1 = (470,55)
+c2 = (330,170)
+
+Only modify these numbers.
+============================================================
+-->
+
+<style>
+svg{
+    --fill:#980018;
+    --stroke:#000;
+    --strokeWidth:4;
+}
+.shape{
+    fill:var(--fill);
+    stroke:var(--stroke);
+    stroke-width:var(--strokeWidth);
+    stroke-linejoin:round;
+    stroke-linecap:round;
+}
+</style>
+
+<path class="shape"
+d="
+M 90,95
+
+A 45,45 0 0 1 135,50
+
+L 520,50
+
+C
+470,55
+330,170
+330,340
+
+L 135,340
+
+A 45,45 0 0 1 90,295
+
+Z
+"/>
+
+</svg>

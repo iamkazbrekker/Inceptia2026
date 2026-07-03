@@ -37,52 +37,23 @@ function WandCursor() {
 
   if (!showCursor) return null;
 
-  return (
-    <>
-      {/* Static Vignette Effect (Lighter 0.4 opacity) */}
-      <motion.div
-        className="pointer-events-none fixed inset-0 z-[9996] shadow-[inset_0_0_150px_rgba(0,0,0,0.4)]"
-        style={{ opacity: vignetteOpacity }}
-      />
-
-      {/* Magical Spotlight Effect (Always visible or fade out? Usually we want the wand spotlight everywhere, but the dark overlay fades) */}
-      <motion.div
-        className="pointer-events-none fixed inset-0 z-[9997]"
+    <motion.div
+      className="pointer-events-none fixed top-0 left-0 z-[9999]"
+      style={{
+        x: mouseX,
+        y: mouseY,
+      }}
+    >
+      <img
+        src="/stick.png"
+        alt="Wand"
+        className="w-12 sm:w-16 md:w-20 lg:w-24 drop-shadow-[0_0_15px_rgba(255,215,0,0.8)]"
         style={{
-          background: spotlightBackground,
-          mixBlendMode: "screen",
+          transformOrigin: "top left",
+          transform: "rotate(-35deg) translate(-10%, -10%)",
         }}
       />
-
-      {/* Darkened overlay outside the spotlight for more contrast */}
-      <motion.div
-        className="pointer-events-none fixed inset-0 z-[9998]"
-        style={{
-          background: darkenBackground,
-          opacity: vignetteOpacity // Fades out on scroll so it's only on the front section
-        }}
-      />
-
-      {/* Wand Container for Hardware Accelerated positioning */}
-      <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-[9999]"
-        style={{
-          x: mouseX,
-          y: mouseY,
-        }}
-      >
-        <img
-          src="/stick.png"
-          alt="Wand"
-          className="w-12 sm:w-16 md:w-20 lg:w-24 drop-shadow-[0_0_15px_rgba(255,215,0,0.8)]"
-          style={{
-            transformOrigin: "top left",
-            transform: "rotate(-35deg) translate(-10%, -10%)",
-          }}
-        />
-      </motion.div>
-    </>
-  );
+    </motion.div>
 }
 
 export default WandCursor;
