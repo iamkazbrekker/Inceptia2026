@@ -10,11 +10,11 @@ interface Sponsor {
 
 const sponsors: Sponsor[] = [
   // Title Sponsor
-  { tier: "title", name: "MysticCorp", tagline: "Powering the Future of Magic" },
+  { tier: "title", name: "TBA", tagline: "To Be Announced" },
 
   // Gold Sponsors
-  { tier: "gold", name: "Alchemist Labs" },
-  { tier: "gold", name: "Phoenix Tech" },
+  { tier: "gold", name: "TBA" },
+  { tier: "gold", name: "TBA" },
 ];
 
 const tierConfig = {
@@ -90,9 +90,8 @@ function SponsorCard({ sponsor }: { sponsor: Sponsor }) {
       {/* Icon + Name */}
       <div className="relative z-10 flex flex-col items-center gap-3">
         <div
-          className={`flex items-center justify-center rounded-full mb-2 transition-transform duration-300 ${
-            hovered ? "scale-110" : "scale-100"
-          } ${config.iconSize} ${config.iconBg}`}
+          className={`flex items-center justify-center rounded-full mb-2 transition-transform duration-300 ${hovered ? "scale-110" : "scale-100"
+            } ${config.iconSize} ${config.iconBg}`}
         >
           {/* Wand / sparkle SVG icon */}
           <svg
@@ -154,8 +153,8 @@ export default function SponsorsSection() {
             — Title Sponsor —
           </p>
           <div className="grid grid-cols-1">
-            {titleSponsors.map((s) => (
-              <SponsorCard key={s.name} sponsor={s} />
+            {titleSponsors.map((s, idx) => (
+              <SponsorCard key={`${s.name}-${idx}`} sponsor={s} />
             ))}
           </div>
         </div>
@@ -166,8 +165,8 @@ export default function SponsorsSection() {
             — Gold Sponsors —
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {goldSponsors.map((s) => (
-              <SponsorCard key={s.name} sponsor={s} />
+            {goldSponsors.map((s, idx) => (
+              <SponsorCard key={`${s.name}-${idx}`} sponsor={s} />
             ))}
           </div>
         </div>

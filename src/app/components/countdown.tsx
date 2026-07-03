@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 // Countdown Component
 function Countdown() {
@@ -14,12 +15,7 @@ function Countdown() {
     const difference = targetDate.getTime() - Date.now();
 
     if (difference <= 0) {
-      return {
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-      };
+      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
     }
 
     return {
@@ -40,55 +36,39 @@ function Countdown() {
     return () => clearInterval(interval);
   }, []);
 
+  const timeUnits = [
+    { label: "DAYS", value: timeLeft.days },
+    { label: "HOURS", value: timeLeft.hours.toString().padStart(2, "0") },
+    { label: "MINUTES", value: timeLeft.minutes.toString().padStart(2, "0") },
+    { label: "SECONDS", value: timeLeft.seconds.toString().padStart(2, "0") },
+  ];
+
   return (
-    <div className="flex justify-between text-center mt-2 px-2 w-full max-w-sm mx-auto">
-      <div>
-        <span className="block font-headline-lg text-3xl text-primary-container font-bold">
-          {timeLeft.days}
-        </span>
-        <span className="font-label-md text-xs text-on-surface-variant tracking-wider">
-          DAYS
-        </span>
-      </div>
+    <div className="flex flex-wrap items-center justify-center gap-4 mt-8 w-full max-w-3xl mx-auto z-10 relative">
+      {timeUnits.map((unit, idx) => (
+        <div key={unit.label} className="flex items-center gap-4">
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: idx * 0.1, duration: 0.4 }}
+            className="flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/50 backdrop-blur-md border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+          >
+            <span className="font-display-lg text-4xl sm:text-5xl text-white font-bold drop-shadow-md">
+              {unit.value}
+            </span>
+            <span className="font-label-md text-[9px] sm:text-[10px] text-gray-400 tracking-[0.2em] uppercase mt-2">
+              {unit.label}
+            </span>
+          </motion.div>
 
-      <span className="font-headline-lg text-2xl text-outline-variant font-bold">
-        :
-      </span>
-
-      <div>
-        <span className="block font-headline-lg text-3xl text-primary-container font-bold">
-          {timeLeft.hours.toString().padStart(2, "0")}
-        </span>
-        <span className="font-label-md text-xs text-on-surface-variant tracking-wider">
-          HOURS
-        </span>
-      </div>
-
-      <span className="font-headline-lg text-2xl text-outline-variant font-bold">
-        :
-      </span>
-
-      <div>
-        <span className="block font-headline-lg text-3xl text-primary-container font-bold">
-          {timeLeft.minutes.toString().padStart(2, "0")}
-        </span>
-        <span className="font-label-md text-xs text-on-surface-variant tracking-wider">
-          MINS
-        </span>
-      </div>
-
-      <span className="font-headline-lg text-2xl text-outline-variant font-bold">
-        :
-      </span>
-
-      <div>
-        <span className="block font-headline-lg text-3xl text-primary-container font-bold">
-          {timeLeft.seconds.toString().padStart(2, "0")}
-        </span>
-        <span className="font-label-md text-xs text-on-surface-variant tracking-wider">
-          SECS
-        </span>
-      </div>
+          {/* Colon separator except for the last item */}
+          {idx < timeUnits.length - 1 && (
+            <span className="font-display-lg text-3xl sm:text-4xl text-white/30 font-bold mb-4">
+              :
+            </span>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
