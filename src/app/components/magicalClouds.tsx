@@ -14,38 +14,10 @@ interface Sparkle {
 }
 
 export default function MagicalClouds() {
-  const [isFlashing, setIsFlashing] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparklesRef = useRef<Sparkle[]>([]);
 
-  // Random Lightning Flash Effect
-  useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
 
-    const triggerLightning = () => {
-      // First quick flash
-      setIsFlashing(true);
-      setTimeout(() => {
-        setIsFlashing(false);
-        // Second quick flash (double-flash)
-        if (Math.random() > 0.4) {
-          setTimeout(() => {
-            setIsFlashing(true);
-            setTimeout(() => setIsFlashing(false), 90);
-          }, 120);
-        }
-      }, 70);
-
-      // Schedule next flash between 9s and 19s
-      const nextDelay = Math.random() * 10000 + 9000;
-      timeoutId = setTimeout(triggerLightning, nextDelay);
-    };
-
-    // Start checking for lightning
-    timeoutId = setTimeout(triggerLightning, 6000);
-
-    return () => clearTimeout(timeoutId);
-  }, []);
 
   // Drifting Golden Sparkles Canvas Loop
   useEffect(() => {
@@ -140,12 +112,7 @@ export default function MagicalClouds() {
       {/* Floating Sparkles Canvas */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
-      {/* Lightning Flash Overlay */}
-      <div
-        className={`absolute inset-0 w-full h-full bg-[#fffcf0] transition-opacity duration-75 pointer-events-none z-[5] ${
-          isFlashing ? "opacity-[0.09]" : "opacity-0"
-        }`}
-      />
+
     </div>
   );
 }
