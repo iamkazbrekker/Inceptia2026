@@ -158,7 +158,7 @@ function Page() {
               {/* Event Date injected between timer and logo */}
               <motion.div variants={itemVariants} className="mb-4">
                 <span className="text-yellow-400 font-bold tracking-[0.2em] uppercase text-sm md:text-xl drop-shadow-[0_0_10px_rgba(255,215,0,0.5)] bg-black/40 px-6 py-2 rounded-full border border-yellow-500/20 inline-block">
-                  Organised by ITSA
+                  Organised by Information Technology Students Association (ITSA), PCCOER
                 </span>
               </motion.div>
 
