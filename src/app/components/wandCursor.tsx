@@ -45,7 +45,7 @@ function WandCursor() {
       }}
     >
       <img
-        src="/stick.png"
+        src="/stick.webp"
         alt="Wand"
         className="w-12 sm:w-16 md:w-20 lg:w-24 drop-shadow-[0_0_15px_rgba(255,215,0,0.8)]"
         style={{

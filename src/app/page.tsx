@@ -120,7 +120,7 @@ function Page() {
         {/* Background Image (covers all 7 sections and scrolls naturally) */}
         <div className="absolute top-0 left-0 w-full h-[700vh] z-0 pointer-events-none">
           <Image
-            src="/hero-bg.png"
+            src="/hero-bg.webp"
             alt="Hogwarts"
             fill
             priority

@@ -300,46 +300,82 @@ export default function DomainGateSection() {
       >
         {/* Left panel */}
         <div ref={leftRef} className="absolute inset-0 w-full h-full flex items-center justify-start pr-64">
-          <svg viewBox="0 0 700 420" className="w-auto h-full object-contain animate-[pulse_6s_ease-in-out_infinite]" style={{ pointerEvents: 'none' }}>
-            <defs>
-              <clipPath id="left-gate-clip">
-                <path d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z" />
-              </clipPath>
-            </defs>
-            <foreignObject x="0" y="0" width="700" height="420" clipPath="url(#left-gate-clip)">
-              <div className="w-full h-full bg-white/5 backdrop-blur-md" />
-            </foreignObject>
-            <path
-              d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z"
-              fill="none"
-              stroke="rgba(255, 215, 0, 0.4)"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <div className="relative w-auto h-full">
+            <svg viewBox="0 0 700 420" className="w-auto h-full object-contain animate-[pulse_6s_ease-in-out_infinite]" style={{ pointerEvents: 'none' }}>
+              <defs>
+                <clipPath id="left-gate-clip">
+                  <path d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z" />
+                </clipPath>
+              </defs>
+              <foreignObject x="0" y="0" width="700" height="420" clipPath="url(#left-gate-clip)">
+                <div xmlns="http://www.w3.org/1999/xhtml" className="w-full h-full bg-white/5 backdrop-blur-md" />
+              </foreignObject>
+              <path
+                d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z"
+                fill="none"
+                stroke="rgba(255, 215, 0, 0.4)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {/* Domain content overlay — positioned over the left gate shape */}
+            <div
+              ref={leftContentRef}
+              className="absolute flex flex-col items-center justify-center gap-3 text-center pointer-events-none"
+              style={{
+                top: "12%",
+                left: "13%",
+                width: "35%",
+                height: "70%",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="domain-icon h-50 w-50 object-contain drop-shadow-lg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="" />
+              <span className="domain-title font-bold text-2xl leading-tight font-harry-potter" style={{ color: "#f87171" }} />
+              <span className="domain-desc text-white/70 text-xs leading-relaxed" />
+            </div>
+          </div>
         </div>
 
         {/* Right panel ── mirrors left */}
         <div ref={rightRef} className="absolute inset-0 w-full h-full flex items-center justify-end pl-64">
-          <svg viewBox="0 0 700 420" className="w-auto h-full object-contain scale-x-[-1] animate-[pulse_6s_ease-in-out_infinite]" style={{ pointerEvents: 'none' }}>
-            <defs>
-              <clipPath id="right-gate-clip">
-                <path d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z" />
-              </clipPath>
-            </defs>
-            <foreignObject x="0" y="0" width="700" height="420" clipPath="url(#right-gate-clip)">
-              <div className="w-full h-full bg-white/5 backdrop-blur-md" />
-            </foreignObject>
-            <path
-              d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z"
-              fill="none"
-              stroke="rgba(255, 215, 0, 0.4)"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <div className="relative w-auto h-full">
+            <svg viewBox="0 0 700 420" className="w-auto h-full object-contain scale-x-[-1] animate-[pulse_6s_ease-in-out_infinite]" style={{ pointerEvents: 'none' }}>
+              <defs>
+                <clipPath id="right-gate-clip">
+                  <path d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z" />
+                </clipPath>
+              </defs>
+              <foreignObject x="0" y="0" width="700" height="420" clipPath="url(#right-gate-clip)">
+                <div xmlns="http://www.w3.org/1999/xhtml" className="w-full h-full bg-white/5 backdrop-blur-md" />
+              </foreignObject>
+              <path
+                d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z"
+                fill="none"
+                stroke="rgba(255, 215, 0, 0.4)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {/* Domain content overlay — positioned over the right gate shape (mirror-aware) */}
+            <div
+              ref={rightContentRef}
+              className="absolute flex flex-col items-center justify-center gap-3 text-center pointer-events-none"
+              style={{
+                top: "12%",
+                right: "13%",
+                width: "35%",
+                height: "70%",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="domain-icon  h-50 w-50 object-contain drop-shadow-lg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="" />
+              <span className="domain-title font-bold text-2xl leading-tight font-harry-potter" style={{ color: "#60a5fa" }} />
+              <span className="domain-desc text-white/70 text-xs leading-relaxed" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
