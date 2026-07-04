@@ -5,24 +5,32 @@ import { useState } from "react";
 
 const faqs = [
   {
-    question: "What is Inceptia 2K26?",
-    answer: "Inceptia 2K26 is a 24-hour national level hackathon designed to bring together the brightest minds to solve real-world problems using technology."
+    question: "What is INCEPTIA 2K26?",
+    answer: "INCEPTIA 2K26 is a 24-hour national hackathon inspired by the magical universe of Harry Potter. It challenges teams to solve real-world problems and showcase their technical brilliance to industry experts."
   },
   {
-    question: "Who can participate?",
-    answer: "The hackathon is open to all university students, regardless of their major or experience level. If you have a passion for technology and innovation, you belong here!"
+    question: "Where and when is the hackathon?",
+    answer: "The event will take place on the 7th and 8th of August at the 6th Floor Auditorium, PCCOER."
   },
   {
-    question: "Do I need a team?",
-    answer: "Yes, you can participate in teams of 2 to 4 members. If you don't have a team, don't worry! We will have team formation sessions before the hackathon begins."
+    question: "Do I need a team to participate?",
+    answer: "Yes, you need to assemble a team of 2 to 4 members to participate in the hackathon."
   },
   {
-    question: "How much does it cost?",
-    answer: "Participation in Inceptia 2K26 is completely free! We provide food, swag, and a magical environment for you to build your projects."
+    question: "How much is the registration fee?",
+    answer: "The registration fee is ₹549 per person. However, this is only applicable for teams that are shortlisted for Round 2."
   },
   {
-    question: "What should I bring?",
-    answer: "Bring your laptop, charger, student ID, and any other hardware you might need for your project. A sleeping bag is also recommended if you plan to rest!"
+    question: "What is the format of the competition?",
+    answer: "Round 1 is an Idea Submission where teams submit a PPT evaluated on innovation, technical feasibility, and impact. Shortlisted teams will advance to Round 2, which is the intense 24-hour hackathon to build and present a functional prototype."
+  },
+  {
+    question: "What is the prize pool?",
+    answer: "The winning team takes home ₹25,000! The 2nd Prize is ₹15,000, and the 3rd Prize is ₹10,000."
+  },
+  {
+    question: "Why should I participate?",
+    answer: "Expect 24 hours of pure innovation, networking with mentors and professionals, evaluation by industry experts, exciting cash prizes, and potential internship opportunities for outstanding teams. All finalists also receive a certificate of participation."
   }
 ];
 

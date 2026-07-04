@@ -44,16 +44,16 @@ function Countdown() {
   ];
 
   return (
-    <div className="flex flex-wrap items-center justify-center gap-4 mt-8 w-full max-w-3xl mx-auto z-10 relative">
+    <div className="flex flex-row items-center justify-center gap-1 sm:gap-4 mt-8 w-full max-w-3xl mx-auto z-10 relative px-2">
       {timeUnits.map((unit, idx) => (
-        <div key={unit.label} className="flex items-center gap-4">
+        <div key={unit.label} className="flex items-center gap-1 sm:gap-4">
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: idx * 0.1, duration: 0.4 }}
-            className="flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/50 backdrop-blur-md border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+            className="flex flex-col items-center justify-center w-[4.2rem] h-[4.5rem] sm:w-28 sm:h-28 rounded-xl sm:rounded-2xl bg-black/50 backdrop-blur-md border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
           >
-            <span className="font-display-lg text-4xl sm:text-5xl text-white drop-shadow-md">
+            <span className="font-display-lg text-2xl sm:text-5xl text-white drop-shadow-md">
               {unit.value}
             </span>
             <span className="font-label-md text-[9px] sm:text-[10px] text-gray-400 tracking-[0.2em] uppercase mt-2">
@@ -63,7 +63,7 @@ function Countdown() {
 
           {/* Colon separator except for the last item */}
           {idx < timeUnits.length - 1 && (
-            <span className="font-display-lg text-3xl sm:text-4xl text-white/30 font-bold mb-4">
+            <span className="font-display-lg text-xl sm:text-4xl text-white/30 font-bold sm:mb-4">
               :
             </span>
           )}

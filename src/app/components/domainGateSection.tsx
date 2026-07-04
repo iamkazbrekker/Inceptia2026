@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
-import gsap from "gsap";
+import React, { useRef, useState, useEffect } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 const domains = [
   {
@@ -9,375 +10,230 @@ const domains = [
     description:
       "Build intelligent machine learning models, neural networks, and self-directing software agents to solve automated challenges.",
     icon: "/emblems/aiml.svg",
-    accentColor: "#f87171",
+    accentColor: "text-red-400",
     glowColor: "rgba(239, 68, 68, 0.45)",
+    bgGradient: "from-red-950/40 via-red-900/20 to-transparent",
+    borderColor: "border-red-500/50",
   },
   {
     title: "Web3 & Fintech",
     description:
       "Develop decentralized financial protocols, cryptographic ledger applications, custom smart contracts, and secure blockchain code.",
     icon: "/emblems/web3.svg",
-    accentColor: "#60a5fa",
+    accentColor: "text-blue-400",
     glowColor: "rgba(59, 130, 246, 0.45)",
+    bgGradient: "from-blue-950/40 via-blue-900/20 to-transparent",
+    borderColor: "border-blue-500/50",
   },
   {
     title: "Healthcare",
     description:
       "Forge biotech applications, digital diagnostic systems, medical support portals, and assistive technologies to improve patient accessibility.",
     icon: "/emblems/healthcare.svg",
-    accentColor: "#facc15",
+    accentColor: "text-yellow-400",
     glowColor: "rgba(245, 158, 11, 0.45)",
+    bgGradient: "from-yellow-950/40 via-yellow-900/20 to-transparent",
+    borderColor: "border-yellow-500/50",
   },
   {
     title: "Education",
     description:
       "Design interactive digital classrooms, game-based learning environments, simulation systems, and training interfaces.",
     icon: "/emblems/education.svg",
-    accentColor: "#34d399",
+    accentColor: "text-emerald-400",
     glowColor: "rgba(16, 185, 129, 0.45)",
+    bgGradient: "from-emerald-950/40 via-emerald-900/20 to-transparent",
+    borderColor: "border-emerald-500/50",
   },
   {
     title: "Open Innovation",
     description:
       "A category dedicated to any groundbreaking technology, software solutions, or physical prototype that does not fit into the other four domains.",
     icon: "/emblems/otherinnovation.svg",
-    accentColor: "#a78bfa",
+    accentColor: "text-purple-400",
     glowColor: "rgba(139, 92, 246, 0.45)",
+    bgGradient: "from-purple-950/40 via-purple-900/20 to-transparent",
+    borderColor: "border-purple-500/50",
   },
 ];
 
-const TOTAL_STEPS = 5;
-
 export default function DomainGateSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const stageRef = useRef<HTMLDivElement>(null);
-  const leftRef = useRef<HTMLDivElement>(null);
-  const rightRef = useRef<HTMLDivElement>(null);
-  const leftContentRef = useRef<HTMLDivElement>(null);
-  const rightContentRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const stateRef = useRef({
-    step: 0,
-    entryDirection: null as "down" | "up" | null, // which way the user scrolled to enter
-    animating: false,
-    isActive: false,
-    locked: false,
-    introPlaying: false,
-    lastStepTime: 0,
-    lastWheelTime: 0,
-  });
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const { scrollLeft, clientWidth } = scrollRef.current;
+    
+    // The total scrollable area consists of cards and gap.
+    // By finding which card is closest to the center of the scroll view, we update activeIndex.
+    const scrollCenter = scrollLeft + clientWidth / 2;
+    
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    // Iterate through children to find the one closest to the center
+    const children = Array.from(scrollRef.current.children);
+    children.forEach((child, index) => {
+      // Ignore spacer divs which we'll add at the start and end (index 0 and length-1)
+      if (index === 0 || index === children.length - 1) return;
+      
+      const el = child as HTMLElement;
+      const childCenter = el.offsetLeft + el.offsetWidth / 2;
+      const distance = Math.abs(scrollCenter - childCenter);
+      
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = index - 1; // Subtract 1 because of the initial spacer div
+      }
+    });
+
+    if (closestIndex !== activeIndex && closestIndex >= 0 && closestIndex < domains.length) {
+      setActiveIndex(closestIndex);
+    }
+  };
 
   useEffect(() => {
-    const section = sectionRef.current;
-    const title = titleRef.current;
-    const stage = stageRef.current;
-    const left = leftRef.current;
-    const right = rightRef.current;
-    const leftContent = leftContentRef.current;
-    const rightContent = rightContentRef.current;
-    if (!section || !title || !stage || !left || !right) return;
-
-    // ── Update domain content inside a panel ─────────────────────────
-    function setDomainContent(contentEl: HTMLDivElement | null, domainIndex: number) {
-      if (!contentEl) return;
-      const d = domains[domainIndex];
-      if (!d) return;
-      const img = contentEl.querySelector<HTMLImageElement>(".domain-icon");
-      const titleEl = contentEl.querySelector<HTMLElement>(".domain-title");
-      const descEl = contentEl.querySelector<HTMLElement>(".domain-desc");
-      if (img) { img.src = d.icon; img.alt = d.title; }
-      if (titleEl) { titleEl.textContent = d.title; (titleEl as HTMLElement).style.color = d.accentColor; }
-      if (descEl) descEl.textContent = d.description;
-    }
-
-    const state = stateRef.current;
-    const container = document.getElementById("main-scroll-container");
-
-    // ── Scroll helpers ─────────────────────────────────────────────
-    function lockScroll() {
-      if (container) container.style.overflowY = "hidden";
-      state.locked = true;
-    }
-    function unlockScroll() {
-      if (container) container.style.overflowY = "scroll";
-      state.locked = false;
-    }
-
-    // ── Reset everything to initial hidden state ───────────────────
-    function reset() {
-      gsap.killTweensOf([left, right, title, stage]);
-      state.step = 0;
-      state.entryDirection = null;
-      state.animating = false;
-      state.introPlaying = false;
-      state.lastStepTime = 0;
-      // Panels off-screen
-      gsap.set(left, { x: "-100vw" });
-      gsap.set(right, { x: "100vw" });
-      // Title and stage hidden
-      gsap.set(title, { opacity: 0, y: 24 });
-      gsap.set(stage, { opacity: 0 });
-    }
-
-    // ── Play entry intro (fade-in), then kick off first panel ──────
-    function playIntro() {
-      state.introPlaying = true;
-      gsap.timeline({
-        onComplete: () => {
-          state.introPlaying = false;
-          runStep(); // first panel slides in right after intro
-        }
-      })
-        .to(title, { opacity: 1, y: 0, duration: 0.55, ease: "power2.out" })
-        .to(stage, { opacity: 1, duration: 0.35, ease: "none" }, "-=0.25");
-    }
-
-    // ── Called when a step animation finishes ──────────────────────
-    function onStepComplete(nextStep: number) {
-      state.step = nextStep;
-      state.animating = false;
-    }
-
-    // ── Advance one animation step ─────────────────────────────────
-    function runStep() {
-      const now = Date.now();
-      if (state.animating || state.introPlaying || state.step > TOTAL_STEPS) return;
-
-      // Short cooldown — just enough to prevent double-fires, not enough to feel sluggish
-      if (now - state.lastStepTime < 500) return;
-      state.lastStepTime = now;
-
-      state.animating = true;
-
-      const step = state.step;
-
-      if (step === TOTAL_STEPS) {
-        // All 5 panels shown → exit animation + unlock scroll so the page moves
-        unlockScroll();
-        const lastWasLeft = (step - 1) % 2 === 0;
-        if (lastWasLeft) {
-          gsap.to(left, {
-            x: "-100vw", duration: 0.35, ease: "power3.in",
-            onComplete: () => { state.animating = false; state.step++; },
-          });
-        } else {
-          gsap.to(right, {
-            x: "100vw", duration: 0.35, ease: "power3.in",
-            onComplete: () => { state.animating = false; state.step++; },
-          });
-        }
-        return;
-      }
-
-      const showLeft = step % 2 === 0;
-
-      // Map step → domain index (0-4) and load content before animating
-      const domainIndex = step; // step 0=AI&ML, 1=Web3, 2=Healthcare, 3=Education, 4=OpenInnovation
-      if (step === 0) {
-        // First: left slides in from the left to center (x: 0)
-        setDomainContent(leftContent, domainIndex);
-        gsap.to(left, {
-          x: 0, duration: 0.45, ease: "power3.out",
-          onComplete: () => onStepComplete(1),
-        });
-      } else if (showLeft) {
-        // Swap: right exits right, left enters from left — simultaneous
-        setDomainContent(leftContent, domainIndex);
-        gsap.to(right, { x: "100vw", duration: 0.32, ease: "power3.in" });
-        gsap.to(left, {
-          x: 0, duration: 0.45, ease: "power3.out", delay: 0.06,
-          onComplete: () => onStepComplete(step + 1),
-        });
-      } else {
-        // Swap: left exits left, right enters from right — simultaneous
-        setDomainContent(rightContent, domainIndex);
-        gsap.to(left, { x: "-100vw", duration: 0.32, ease: "power3.in" });
-        gsap.to(right, {
-          x: 0, duration: 0.45, ease: "power3.out", delay: 0.06,
-          onComplete: () => onStepComplete(step + 1),
-        });
-      }
-    }
-
-    // ── Wheel handler ──────────────────────────────────────────────
-    function onWheel(e: WheelEvent) {
-      if (!state.isActive || !state.locked) return;
-      // Let intro play out undisturbed
-      if (state.introPlaying) { e.preventDefault(); e.stopPropagation(); return; }
-
-      const now = Date.now();
-      const timeSinceLastWheel = now - state.lastWheelTime;
-      state.lastWheelTime = now;
-
-      const goingDown = e.deltaY > 0;
-      const goingUp = e.deltaY < 0;
-
-      // Record entry direction on first meaningful wheel event
-      if (state.entryDirection === null) {
-        if (goingDown) state.entryDirection = "down";
-        else if (goingUp) state.entryDirection = "up";
-        else return;
-      }
-
-      // Accept scrolls that match the entry direction (the direction the user
-      // was scrolling when they arrived at this section)
-      const correctDir =
-        (state.entryDirection === "down" && goingDown) ||
-        (state.entryDirection === "up" && goingUp);
-
-      // Trackpad inertia guard — shorter cooldowns for snappier feel
-      if (timeSinceLastWheel < 150) {
-        if (now - state.lastStepTime < 800) {
-          if (correctDir) { e.preventDefault(); e.stopPropagation(); }
-          return;
-        }
-      } else {
-        if (now - state.lastStepTime < 500) {
-          if (correctDir) { e.preventDefault(); e.stopPropagation(); }
-          return;
-        }
-      }
-
-      if (correctDir) {
-        e.preventDefault();
-        e.stopPropagation();
-        runStep();
-      }
-    }
-
-    // ── IntersectionObserver ───────────────────────────────────────
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const nowVisible = entry.isIntersecting && entry.intersectionRatio >= 0.8;
-          const wasActive = state.isActive;
-          state.isActive = nowVisible;
-
-          if (nowVisible && !wasActive) {
-            reset();
-            lockScroll();
-            playIntro(); // fade in, then auto-run step 0
-          }
-
-          if (!nowVisible && wasActive && state.locked) {
-            unlockScroll();
-          }
-        });
-      },
-      { root: container, threshold: 0.8 }
-    );
-
-    observer.observe(section);
-    container?.addEventListener("wheel", onWheel, { passive: false });
-
-    return () => {
-      observer.disconnect();
-      container?.removeEventListener("wheel", onWheel);
-      unlockScroll();
-    };
+    // Check initial scroll position
+    handleScroll();
   }, []);
 
+  // Auto-scroll logic
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      if (!scrollRef.current) return;
+      const children = Array.from(scrollRef.current.children);
+      
+      let nextIndex = activeIndex + 1;
+      if (nextIndex >= domains.length) {
+        nextIndex = 0; // loop back
+      }
+      
+      // children[0] is the left spacer, so domain cards start at index 1
+      const targetChild = children[nextIndex + 1] as HTMLElement;
+      if (targetChild) {
+        // Find the precise scroll position needed to center this child
+        const containerCenter = scrollRef.current.clientWidth / 2;
+        const childCenter = targetChild.offsetLeft + (targetChild.offsetWidth / 2);
+        
+        scrollRef.current.scrollTo({
+          left: childCenter - containerCenter,
+          behavior: "smooth"
+        });
+      }
+    }, 3000); // Auto-scroll every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [activeIndex, isPaused]);
+
+  const activeDomain = domains[activeIndex];
+
   return (
-    <section
-      ref={sectionRef}
-      id="domain-gate"
-      className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden mt-0 pt-0"
-    >
-      <h1
-        ref={titleRef}
-        className="text-5xl font-bold text-white font-harry-potter drop-shadow-[0_0_20px_rgba(255,215,0,0.4)] mb-8"
-        style={{ opacity: 0 }}
+    <section className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden py-12 transition-colors duration-700">
+      
+      {/* Dynamic Background Tint based on Active Domain */}
+      <div className="absolute inset-0 pointer-events-none transition-all duration-1000 z-0">
+        <div className={`absolute inset-0 bg-gradient-to-b opacity-40 transition-all duration-1000 ${activeDomain.bgGradient}`} />
+      </div>
+
+      <motion.h1 
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="text-4xl md:text-6xl font-bold text-white font-harry-potter drop-shadow-[0_0_20px_rgba(255,215,0,0.6)] mb-4 md:mb-10 z-10 text-center px-4"
       >
         Choose Your Domain
-      </h1>
+      </motion.h1>
 
-      {/* Slide stage — overflow:hidden clips off-screen panels */}
-      <div
-        ref={stageRef}
-        className="relative w-full h-[550px] overflow-hidden"
-        style={{ opacity: 0 }}
-      >
-        {/* Left panel */}
-        <div ref={leftRef} className="absolute inset-0 w-full h-full flex items-center justify-start pr-64">
-          <div className="relative w-auto h-full">
-            <svg viewBox="0 0 700 420" className="w-auto h-full object-contain animate-[pulse_6s_ease-in-out_infinite]" style={{ pointerEvents: 'none' }}>
-              <defs>
-                <clipPath id="left-gate-clip">
-                  <path d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z" />
-                </clipPath>
-              </defs>
-              <foreignObject x="0" y="0" width="700" height="420" clipPath="url(#left-gate-clip)">
-                <div {...({"xmlns": "http://www.w3.org/1999/xhtml"} as object)} className="w-full h-full bg-white/5 backdrop-blur-md" />
-              </foreignObject>
-              <path
-                d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z"
-                fill="none"
-                stroke="rgba(255, 215, 0, 0.4)"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            {/* Domain content overlay — positioned over the left gate shape */}
-            <div
-              ref={leftContentRef}
-              className="absolute flex flex-col items-center justify-center gap-3 text-center pointer-events-none"
-              style={{
-                top: "12%",
-                left: "13%",
-                width: "35%",
-                height: "70%",
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="domain-icon h-50 w-50 object-contain drop-shadow-lg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="" />
-              <span className="domain-title font-bold text-2xl leading-tight font-harry-potter" style={{ color: "#f87171" }} />
-              <span className="domain-desc text-white/70 text-xs leading-relaxed" />
-            </div>
-          </div>
-        </div>
+      <div className="relative w-full z-10">
+        {/* Scroll Container */}
+        <div 
+          ref={scrollRef}
+          onScroll={handleScroll}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
+          className="flex w-full overflow-x-auto snap-x snap-mandatory hide-scrollbar items-center pb-12 pt-8"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {/* Spacer to allow the first item to snap to center */}
+          <div className="shrink-0 w-[50vw] sm:w-[calc(50vw-180px)] md:w-[calc(50vw-200px)] h-1" />
 
-        {/* Right panel ── mirrors left */}
-        <div ref={rightRef} className="absolute inset-0 w-full h-full flex items-center justify-end pl-64">
-          <div className="relative w-auto h-full">
-            <svg viewBox="0 0 700 420" className="w-auto h-full object-contain scale-x-[-1] animate-[pulse_6s_ease-in-out_infinite]" style={{ pointerEvents: 'none' }}>
-              <defs>
-                <clipPath id="right-gate-clip">
-                  <path d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z" />
-                </clipPath>
-              </defs>
-              <foreignObject x="0" y="0" width="700" height="420" clipPath="url(#right-gate-clip)">
-                <div {...({"xmlns": "http://www.w3.org/1999/xhtml"} as object)} className="w-full h-full bg-white/5 backdrop-blur-md" />
-              </foreignObject>
-              <path
-                d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z"
-                fill="none"
-                stroke="rgba(255, 215, 0, 0.4)"
-                strokeWidth="4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            {/* Domain content overlay — positioned over the right gate shape (mirror-aware) */}
-            <div
-              ref={rightContentRef}
-              className="absolute flex flex-col items-center justify-center gap-3 text-center pointer-events-none"
-              style={{
-                top: "12%",
-                right: "13%",
-                width: "35%",
-                height: "70%",
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="domain-icon  h-50 w-50 object-contain drop-shadow-lg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="" />
-              <span className="domain-title font-bold text-2xl leading-tight font-harry-potter" style={{ color: "#60a5fa" }} />
-              <span className="domain-desc text-white/70 text-xs leading-relaxed" />
-            </div>
-          </div>
+          {domains.map((domain, idx) => {
+            const isActive = idx === activeIndex;
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                className={`relative shrink-0 w-[85vw] sm:w-[360px] md:w-[400px] mx-3 sm:mx-4 snap-center rounded-[2rem] border bg-black/40 backdrop-blur-2xl p-8 flex flex-col items-center group transition-all duration-700 ${isActive ? 'scale-105 shadow-2xl z-20' : 'scale-95 opacity-50 hover:opacity-80 z-10'} ${domain.borderColor}`}
+                style={{
+                  boxShadow: isActive ? `0 20px 50px -10px ${domain.glowColor}, inset 0 0 20px rgba(255,255,255,0.05)` : `0 0 30px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.05)`,
+                }}
+              >
+                {/* Internal Glow Effect */}
+                <div 
+                  className={`absolute inset-0 rounded-[2rem] opacity-0 transition-opacity duration-700 pointer-events-none -z-10 bg-gradient-to-br from-transparent to-black`}
+                  style={{ filter: "blur(10px)" }}
+                />
+                
+                {/* Top gradient line highlight */}
+                <div className={`absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-white to-transparent rounded-t-[2rem] opacity-30 transition-opacity`} />
+
+                <div className="relative w-32 h-32 md:w-40 md:h-40 mb-8 transition-transform duration-700 ease-out">
+                  {/* SVG Icon Glow */}
+                  <div 
+                    className={`absolute inset-0 rounded-full blur-2xl transition-opacity duration-700 ${isActive ? 'opacity-70' : 'opacity-20'}`}
+                    style={{ backgroundColor: domain.glowColor }}
+                  />
+                  <Image 
+                    src={domain.icon} 
+                    alt={domain.title} 
+                    fill
+                    className={`object-contain relative z-10 transition-all duration-700 ${isActive ? 'drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] scale-110' : 'drop-shadow-none scale-100 grayscale-[0.3]'}`} 
+                  />
+                </div>
+                
+                <h2 className={`text-4xl font-bold mb-4 text-center font-harry-potter transition-colors duration-500 ${isActive ? 'text-white' : 'text-gray-400'}`}>
+                  {domain.title}
+                </h2>
+                
+                <div className={`h-px transition-all duration-700 ease-in-out mb-6 ${isActive ? 'w-24 bg-white/40' : 'w-12 bg-white/10'}`} />
+                
+                <p className={`text-center leading-relaxed text-sm md:text-base px-2 transition-colors duration-500 ${isActive ? 'text-gray-200' : 'text-gray-500'}`}>
+                  {domain.description}
+                </p>
+              </motion.div>
+            );
+          })}
+
+          {/* Spacer to allow the last item to snap to center */}
+          <div className="shrink-0 w-[50vw] sm:w-[calc(50vw-180px)] md:w-[calc(50vw-200px)] h-1" />
         </div>
       </div>
+      
+      {/* Mobile Swipe Indicator / Dot Indicators */}
+      <div className="flex items-center justify-center gap-2 mt-4 z-20">
+        {domains.map((_, idx) => (
+          <div 
+            key={idx}
+            className={`h-2 rounded-full transition-all duration-500 ${idx === activeIndex ? 'w-8 bg-yellow-400' : 'w-2 bg-white/20'}`}
+          />
+        ))}
+      </div>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}} />
     </section>
   );
 }

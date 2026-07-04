@@ -4,47 +4,45 @@ import { motion } from "framer-motion";
 
 export default function AboutSection() {
   return (
-    <section className="relative z-10 mt-10 w-full min-h-screen flex items-center justify-center px-4 md:px-12 py-24">
-      {/* Background Subtle glow */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-yellow-900/10 to-transparent pointer-events-none" />
+    <section className="relative z-10 w-full min-h-screen flex items-center justify-center px-6 md:px-12 py-24">
+      {/* Subtle radial glow background */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-yellow-900/10 via-transparent to-transparent pointer-events-none opacity-60" />
 
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-10%" }}
-        transition={{ duration: 0.8 }}
-        className="relative z-10 max-w-5xl w-full flex flex-col items-center text-center"
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="relative z-10 max-w-4xl w-full flex flex-col items-center text-center space-y-12"
       >
-        <h2 className="font-harry-potter text-4xl md:text-7xl text-white mb-8 drop-shadow-[0_0_20px_rgba(255,215,0,0.4)]">
-          About Inceptia 2K26
-        </h2>
+        {/* Minimal Title */}
+        <div className="space-y-6">
+          <h2 className="font-harry-potter text-4xl md:text-6xl text-yellow-500/90 tracking-wider">
+            About the Hackathon
+          </h2>
+          <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-yellow-500/50 to-transparent mx-auto"></div>
+        </div>
         
-        <div className="glass-morphic p-8 md:p-14 rounded-[2rem] border border-yellow-500/20 bg-gradient-to-b from-transparent via-yellow-900/10 to-transparent backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
-          <p className="text-md md:text-2xl text-gray-200 leading-relaxed font-body-lg mb-6">
-            Inceptia 2K26 is the premier 24-hour national level hackathon where magic meets technology. 
-            We aim to foster innovation, collaboration, and rapid prototyping among the brightest minds across the country.
-          </p>
-          <p className="text-md md:text-xl text-gray-300 leading-relaxed font-body-lg">
-            Whether you are a master of Artificial Intelligence, a wizard of Web3, or an innovator in Healthcare and Education, 
-            this is your arena to showcase your technical brilliance. Assemble your house, brew your code, and conjure solutions 
-            that will leave a lasting impact on the world.
-          </p>
+        {/* Minimal Typography Text */}
+        <p className="text-lg md:text-2xl text-gray-300 leading-relaxed font-light font-body-lg max-w-3xl">
+          Where magic meets technology. <strong className="text-yellow-100 font-normal">INCEPTIA 2K26</strong> is a premier national-level hackathon designed to foster innovation, collaboration, and rapid prototyping among the brightest minds.
+          <br /><br />
+          Whether you are a master of AI, a wizard of Web3, or a healthcare innovator, this is your arena. Assemble your house, brew your code, and conjure solutions that will leave a lasting impact on the world.
+        </p>
 
-          <div className="mt-10 flex flex-wrap justify-center gap-6">
-            <div className="flex flex-col items-center">
-              <span className="text-yellow-400 font-harry-potter text-4xl md:text-5xl">24</span>
-              <span className="text-gray-400 text-sm tracking-widest uppercase mt-2">Hours</span>
-            </div>
-            <div className="w-px h-12 bg-yellow-500/30 hidden md:block mt-2"></div>
-            <div className="flex flex-col items-center">
-              <span className="text-yellow-400 font-harry-potter text-4xl md:text-5xl">5</span>
-              <span className="text-gray-400 text-sm tracking-widest uppercase mt-2">Domains</span>
-            </div>
-            <div className="w-px h-12 bg-yellow-500/30 hidden md:block mt-2"></div>
-            <div className="flex flex-col items-center">
-              <span className="text-yellow-400 font-harry-potter text-4xl md:text-5xl">₹50K+</span>
-              <span className="text-gray-400 text-sm tracking-widest uppercase mt-2">Prize Pool</span>
-            </div>
+        {/* Minimal Stats Line */}
+        <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 pt-8 mt-4 border-t border-white/5">
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-yellow-400 font-harry-potter text-5xl md:text-7xl drop-shadow-[0_0_20px_rgba(255,215,0,0.8)]">24</span>
+            <span className="text-gray-400 text-xs tracking-[0.2em] uppercase">Hours</span>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-yellow-400 font-harry-potter text-5xl md:text-7xl drop-shadow-[0_0_20px_rgba(255,215,0,0.8)]">5</span>
+            <span className="text-gray-400 text-xs tracking-[0.2em] uppercase">Domains</span>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-yellow-400 font-harry-potter text-5xl md:text-7xl drop-shadow-[0_0_20px_rgba(255,215,0,0.8)]">₹50K+</span>
+            <span className="text-gray-400 text-xs tracking-[0.2em] uppercase">Prize Pool</span>
           </div>
         </div>
       </motion.div>

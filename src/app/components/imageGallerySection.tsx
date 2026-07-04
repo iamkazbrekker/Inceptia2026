@@ -7,12 +7,12 @@ import Image from "next/image";
 // For example, if you upload 'event1.jpg' to 'public/gallery/event1.jpg', 
 // you would add '/gallery/event1.jpg' to this list.
 const galleryImages = [
-  "/gallery/event1.jpg",
-  "/gallery/event2.jpg",
-  "/gallery/placeholder3.jpg",
-  "/gallery/placeholder4.jpg",
-  "/gallery/placeholder5.jpg",
-  "/gallery/placeholder6.jpg",
+  "/gallery/1.jpg",
+  "/gallery/2.jpg",
+  "/gallery/3.jpg",
+  "/gallery/4.jpg",
+  "/gallery/5.jpg",
+  "/gallery/6.jpg",
 ];
 
 // Duplicate the array to create a seamless loop

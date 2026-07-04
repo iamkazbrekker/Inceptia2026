@@ -72,13 +72,17 @@ function ParchmentEdge() {
   );
 }
 
-const quickLinks = ["About", "Domains", "Timeline", "FAQs"];
-const legalLinks = ["Code of Conduct", "Privacy Policy", "Terms of Service"];
+const quickLinks = [
+  { label: "About", href: "#about" },
+  { label: "Domains", href: "#domains" },
+  { label: "Timeline", href: "#timeline" },
+  { label: "FAQs", href: "#faq" }
+];
 
 const socials = [
   {
     name: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/inceptia_pccoer",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
         <rect x="3" y="3" width="18" height="18" rx="5" />
@@ -127,7 +131,7 @@ export default function Footer() {
       <div className="pointer-events-none absolute top-20 right-1/5 h-72 w-72 rounded-full bg-yellow-500/[0.04] blur-3xl" />
 
       <div className="relative flex w-full flex-col items-center gap-12 px-6 py-16 sm:px-8 md:px-16 lg:px-24">
-        <div className="grid w-full max-w-7xl grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1.1fr]">
+        <div className="grid w-full max-w-7xl grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1.5fr]">
           {/* Brand / Contact */}
           <div className="flex max-w-sm flex-col gap-4">
             <div className="font-harry-potter text-3xl tracking-widest text-yellow-400 drop-shadow-[0_0_15px_rgba(255,215,0,0.4)] sm:text-4xl">
@@ -161,29 +165,13 @@ export default function Footer() {
             <h4 className="font-body-md text-sm font-bold uppercase tracking-widest text-yellow-500">
               Explore
             </h4>
-            {quickLinks.map((label) => (
+            {quickLinks.map((link) => (
               <a
-                key={label}
-                href="#"
+                key={link.label}
+                href={link.href}
                 className="font-body-md w-fit text-sm text-gray-300 transition-colors hover:text-yellow-400"
               >
-                {label}
-              </a>
-            ))}
-          </div>
-
-          {/* Legal */}
-          <div className="flex flex-col gap-4">
-            <h4 className="font-body-md text-sm font-bold uppercase tracking-widest text-yellow-500">
-              Legal
-            </h4>
-            {legalLinks.map((label) => (
-              <a
-                key={label}
-                href="#"
-                className="font-body-md w-fit text-sm text-gray-300 transition-colors hover:text-yellow-400"
-              >
-                {label}
+                {link.label}
               </a>
             ))}
           </div>
@@ -231,6 +219,8 @@ export default function Footer() {
               <a
                 key={s.name}
                 href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={s.name}
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-yellow-500/25 text-gray-300 transition-all hover:-translate-y-0.5 hover:border-yellow-400/60 hover:text-yellow-400 hover:shadow-[0_0_12px_rgba(212,175,55,0.35)]"
               >

@@ -5,15 +5,17 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import WandCursor from "./components/wandCursor";
 import Countdown from "./components/countdown";
-import TimelineSection from "./components/timelineSection";
-import PrizesSection from "./components/prizeSection";
-import SponsorsSection from "./components/sponsorsSection";
-import Footer from "./components/footer";
 import LoadingScreen from "./components/loadingScreen";
-import AboutSection from "./components/aboutSection";
-import ImageGallerySection from "./components/imageGallerySection";
-import FaqSection from "./components/faqSection";
-import DomainGateSection from "./components/domainGateSection";
+import dynamic from "next/dynamic";
+
+const TimelineSection = dynamic(() => import("./components/timelineSection"), { ssr: false });
+const PrizesSection = dynamic(() => import("./components/prizeSection"), { ssr: false });
+const SponsorsSection = dynamic(() => import("./components/sponsorsSection"), { ssr: false });
+const Footer = dynamic(() => import("./components/footer"), { ssr: false });
+const AboutSection = dynamic(() => import("./components/aboutSection"), { ssr: false });
+const ImageGallerySection = dynamic(() => import("./components/imageGallerySection"), { ssr: false });
+const FaqSection = dynamic(() => import("./components/faqSection"), { ssr: false });
+const DomainGateSection = dynamic(() => import("./components/domainGateSection"), { ssr: false });
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -126,18 +128,18 @@ function Page() {
 
         {/* 1. Hero Section */}
         <div className="w-full h-screen snap-start snap-always shrink-0 overflow-hidden flex flex-col justify-center items-start relative z-10">
-          <section className="relative w-full flex flex-col items-start justify-center text-left px-8 md:px-24 py-12">
+          <section className="relative w-full flex flex-col items-center md:items-start justify-center text-center md:text-left px-4 sm:px-8 md:px-24 py-12">
             {/* Hero Content */}
             <motion.div
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="max-w-4xl flex flex-col items-start justify-center gap-6 mt-12 w-full"
+              className="max-w-4xl flex flex-col items-center md:items-start justify-center gap-6 mt-12 w-full"
             >
               {/* Logo / Title animation */}
-              <motion.div variants={itemVariants} className="text-left pt-10">
+              <motion.div variants={itemVariants} className="text-center md:text-left pt-10">
                 <h1
-                  className="font-harry-potter text-5xl sm:text-8xl md:text-[110px] lg:text-[125px] text-white select-none italic pt-4 leading-tight"
+                  className="font-harry-potter text-[3.5rem] leading-[1.1] sm:text-7xl md:text-[110px] lg:text-[125px] text-white select-none italic pt-4 md:leading-tight"
                   style={{
                     fontWeight: "bold",
                     textShadow: "0 0 20px rgba(255,215,0,0.6), 0 0 40px rgba(255,215,0,0.4), 0 0 80px rgba(255,215,0,0.2)"
@@ -147,21 +149,21 @@ function Page() {
                 </h1>
               </motion.div>
 
-              {/* Organizer */}
+              {/* Date & Timer */}
               <motion.div
                 variants={itemVariants}
-                className="mb-4 flex justify-center px-4"
+                className="mb-6 flex flex-col items-center md:items-start px-4 w-full"
               >
-                <span className="inline-block max-w-4xl rounded-xl border border-yellow-500/30 bg-black/40 px-4 py-2 text-center font-semibold uppercase tracking-[0.08em] text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg leading-relaxed text-yellow-400 drop-shadow-[0_0_10px_rgba(255,215,0,0.5)]">
-                  Organised by Information Technology Department, PCCOER
+                <span className="inline-block mb-4 rounded-xl border border-yellow-500/30 bg-black/40 px-4 py-2 text-center font-semibold uppercase tracking-[0.08em] text-xs sm:text-sm lg:text-base text-yellow-400 drop-shadow-[0_0_10px_rgba(255,215,0,0.5)]">
+                  7th - 8th August 2026
                 </span>
-              </motion.div>
-
-              {/* <motion.div variants={itemVariants} className="w-full mb-8 flex justify-start">
-                <div className="scale-90 origin-left md:scale-100">
-                  <Countdown />
+                
+                <div className="w-full flex justify-center md:justify-start">
+                  <div className="scale-90 origin-center md:origin-left md:scale-100">
+                    <Countdown />
+                  </div>
                 </div>
-              </motion.div> */}
+              </motion.div>
 
               {/* Golden Register Button with high click priority */}
               <motion.div variants={itemVariants} className="relative z-50">
@@ -200,17 +202,17 @@ function Page() {
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.9, opacity: 0 }}
-                  className="w-full max-w-3xl rounded-3xl border border-yellow-500/30 bg-[#120d22] py-8 px-5 shadow-[0_0_60px_rgba(255,215,0,0.2)] max-h-[90vh] overflow-y-auto"
+                  className="w-full max-w-3xl rounded-3xl border border-yellow-500/30 bg-[#120d22]/95 backdrop-blur-xl py-6 px-4 sm:py-8 sm:px-6 shadow-[0_0_60px_rgba(255,215,0,0.2)] max-h-[90vh] overflow-y-auto"
                 >
                   {/* Heading */}
-                  <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-2xl md:text-3xl font-bold text-yellow-400">
+                  <div className="flex justify-between items-center mb-6 sm:mb-8 sticky top-0 bg-[#120d22]/90 backdrop-blur-md pb-2 z-10 -mt-2">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-yellow-400">
                       Registration Details
                     </h2>
 
                     <button
                       onClick={() => setShowRegistrationModal(false)}
-                      className="text-3xl text-white hover:text-yellow-400"
+                      className="text-3xl text-white hover:text-yellow-400 p-1"
                     >
                       ×
                     </button>
@@ -294,17 +296,17 @@ function Page() {
         </div>
 
         {/* 2. About Section */}
-        <div className="w-full h-screen snap-start snap-always shrink-0 overflow-hidden flex items-center justify-center relative z-10">
+        <div id="about" className="w-full h-screen snap-start snap-always shrink-0 overflow-hidden flex items-center justify-center relative z-10">
           <AboutSection />
         </div>
 
         {/* 3. Domains Section */}
-        <div className="w-full h-screen snap-start snap-always shrink-0 overflow-hidden mt-30 flex items-center justify-center relative z-10">
+        <div id="domains" className="w-full h-screen snap-start snap-always shrink-0 overflow-hidden mt-30 flex items-center justify-center relative z-10">
           <DomainGateSection />
         </div>
 
         {/* 4. Timeline Section */}
-        <div className="w-full min-h-screen h-auto snap-start snap-always shrink-0 flex items-center justify-center relative z-10 bg-black/20">
+        <div id="timeline" className="w-full min-h-screen h-auto snap-start snap-always shrink-0 flex items-center justify-center relative z-10 bg-black/20">
           <TimelineSection />
         </div>
 
@@ -318,7 +320,7 @@ function Page() {
           <SponsorsSection />
         </div>
 
-        <div className="w-full min-h-screen snap-start snap-always shrink-0 relative z-10">
+        <div id="faq" className="w-full min-h-screen snap-start snap-always shrink-0 relative z-10">
           <ImageGallerySection />
           <FaqSection />
           <Footer />

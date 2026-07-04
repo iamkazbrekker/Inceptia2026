@@ -75,12 +75,11 @@ function PrizesSection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-80px" }}
-            className="relative rounded-3xl backdrop-blur-xl p-8 text-center flex flex-col justify-end transition-transform duration-500 hover:-translate-y-4"
+            className="relative rounded-3xl backdrop-blur-xl p-8 text-center flex flex-col justify-center transition-transform duration-500 hover:-translate-y-4"
             style={{
-              height: "400px",
               background: "linear-gradient(160deg, rgba(80,75,140,0.75) 0%, rgba(45,40,90,0.85) 60%, rgba(25,20,55,0.9) 100%)",
-              border: "1.5px solid rgba(180,180,255,0.35)",
-              boxShadow: "0 0 60px rgba(140,120,255,0.2), inset 0 0 40px rgba(180,160,255,0.08)",
+              border: "1.5px solid rgba(180,180,255,0.4)",
+              boxShadow: "0 0 80px rgba(140,120,255,0.3), inset 0 0 40px rgba(180,160,255,0.1)",
             }}
           >
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-indigo-300/10 via-purple-500/5 to-transparent pointer-events-none" />
@@ -91,21 +90,7 @@ function PrizesSection() {
               </svg>
             </div>
             <h3 className="font-headline-md text-2xl text-slate-200 font-bold mb-2">Runner-Up</h3>
-            <p className="font-headline-lg text-5xl text-slate-100 font-black mb-6">₹15,000</p>
-            <div className="space-y-3 text-sm text-slate-300 font-body-md mt-2">
-              <p className="flex items-center justify-center gap-2">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                Magical Medal
-              </p>
-              <p className="flex items-center justify-center gap-2">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                Certificate of Excellence
-              </p>
-              <p className="flex items-center justify-center gap-2">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1" ry="1"></rect><line x1="12" y1="8" x2="12" y2="21"></line><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path></svg>
-                Exclusive Swag Kit
-              </p>
-            </div>
+            <p className="font-headline-lg text-5xl text-slate-100 font-black">₹15,000</p>
           </motion.div>
 
           {/* ── Grand Champion (1st) — tallest, centred ── */}
@@ -115,12 +100,11 @@ function PrizesSection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-80px" }}
-            className="relative rounded-[28px] backdrop-blur-xl p-10 text-center flex flex-col justify-end md:-translate-y-10 overflow-hidden transition-transform duration-500 hover:scale-105"
+            className="relative rounded-[28px] backdrop-blur-xl p-10 text-center flex flex-col justify-center md:-translate-y-10 overflow-hidden transition-transform duration-500 hover:scale-105"
             style={{
-              height: "500px",
               background: "linear-gradient(160deg, rgba(120,90,0,0.80) 0%, rgba(80,55,0,0.85) 50%, rgba(30,20,0,0.90) 100%)",
-              border: "1.5px solid rgba(255,215,0,0.6)",
-              boxShadow: "0 0 120px rgba(255,215,0,0.35), inset 0 0 60px rgba(255,215,0,0.10)",
+              border: "1.5px solid rgba(255,215,0,0.8)",
+              boxShadow: "0 0 140px rgba(255,215,0,0.5), inset 0 0 80px rgba(255,215,0,0.15)",
             }}
           >
             {/* Ambient gold glow layer */}
@@ -136,25 +120,7 @@ function PrizesSection() {
               </svg>
             </div>
             <h3 className="font-headline-md text-3xl text-yellow-100 font-bold mb-3">Grand Champion</h3>
-            <p className="font-headline-lg text-6xl text-yellow-300 font-black mb-8 drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]">₹25,000</p>
-            <div className="space-y-3 text-sm text-yellow-50 font-body-md mt-2">
-              <p className="flex items-center justify-center gap-2">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10M5 4v3a7 7 0 1 0 14 0V4"></path></svg>
-                Champion Trophy
-              </p>
-              <p className="flex items-center justify-center gap-2">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                Winner Certificate
-              </p>
-              <p className="flex items-center justify-center gap-2">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                Internship Opportunities
-              </p>
-              <p className="flex items-center justify-center gap-2">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1" ry="1"></rect><line x1="12" y1="8" x2="12" y2="21"></line><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path></svg>
-                Premium Goodies
-              </p>
-            </div>
+            <p className="font-headline-lg text-6xl text-yellow-300 font-black drop-shadow-[0_0_12px_rgba(255,215,0,0.5)]">₹25,000</p>
           </motion.div>
 
           {/* ── Second Runner-Up (3rd) ── */}
@@ -164,12 +130,11 @@ function PrizesSection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-80px" }}
-            className="relative rounded-3xl backdrop-blur-xl p-8 text-center flex flex-col justify-end transition-transform duration-500 hover:-translate-y-4"
+            className="relative rounded-3xl backdrop-blur-xl p-8 text-center flex flex-col justify-center transition-transform duration-500 hover:-translate-y-4"
             style={{
-              height: "370px",
               background: "linear-gradient(160deg, rgba(110,55,10,0.80) 0%, rgba(75,35,5,0.85) 55%, rgba(35,18,3,0.90) 100%)",
-              border: "1.5px solid rgba(205,133,63,0.5)",
-              boxShadow: "0 0 60px rgba(180,100,30,0.25), inset 0 0 35px rgba(205,133,63,0.08)",
+              border: "1.5px solid rgba(205,133,63,0.6)",
+              boxShadow: "0 0 80px rgba(180,100,30,0.35), inset 0 0 40px rgba(205,133,63,0.1)",
             }}
           >
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-amber-500/15 via-orange-600/5 to-transparent pointer-events-none" />
@@ -180,22 +145,56 @@ function PrizesSection() {
               </svg>
             </div>
             <h3 className="font-headline-md text-2xl text-amber-200 font-bold mb-2">Second Runner-Up</h3>
-            <p className="font-headline-lg text-5xl text-amber-400 font-black mb-6">₹10,000</p>
-            <div className="space-y-3 text-sm text-amber-200 font-body-md mt-2">
-              <p className="flex items-center justify-center gap-2">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
-                Medal of Honour
-              </p>
-              <p className="flex items-center justify-center gap-2">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                Certificate
-              </p>
-              <p className="flex items-center justify-center gap-2">
-                <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1" ry="1"></rect><line x1="12" y1="8" x2="12" y2="21"></line><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path></svg>
-                Magical Merchandise
-              </p>
-            </div>
+            <p className="font-headline-lg text-5xl text-amber-400 font-black">₹10,000</p>
           </motion.div>
+        </motion.div>
+
+        {/* ── Additional Perks & Goodies Card ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-16 mx-auto max-w-4xl rounded-3xl bg-white/[0.03] backdrop-blur-2xl border border-white/10 p-8 shadow-[0_8px_32px_rgba(0,0,0,0.3)]"
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="flex flex-col items-center">
+              <svg className="w-10 h-10 text-yellow-400 mb-3" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+              <span className="font-body-lg text-slate-300">Certificates for all Finalists</span>
+            </div>
+            
+            <div className="flex flex-col items-center">
+              <svg className="w-10 h-10 text-yellow-400 mb-3" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+              <span className="font-body-lg text-slate-300">Internship Opportunities</span>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <svg className="w-10 h-10 text-yellow-400 mb-3" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span className="font-body-lg text-slate-300">Expert Mentorship</span>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <svg className="w-10 h-10 text-yellow-400 mb-3" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                <rect x="3" y="8" width="18" height="4" rx="1" ry="1"></rect>
+                <line x1="12" y1="8" x2="12" y2="21"></line>
+                <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
+              </svg>
+              <span className="font-body-lg text-slate-300">Exclusive Goodies</span>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
