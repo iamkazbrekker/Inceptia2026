@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function AboutSection() {
   return (
-    <section className="relative z-10 w-full min-h-screen flex items-center justify-center px-4 md:px-12 py-24">
+    <section className="relative z-10 mt-10 w-full min-h-screen flex items-center justify-center px-4 md:px-12 py-24">
       {/* Background Subtle glow */}
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-transparent via-yellow-900/10 to-transparent pointer-events-none" />
 
@@ -15,16 +15,16 @@ export default function AboutSection() {
         transition={{ duration: 0.8 }}
         className="relative z-10 max-w-5xl w-full flex flex-col items-center text-center"
       >
-        <h2 className="font-harry-potter text-5xl md:text-7xl text-white mb-8 drop-shadow-[0_0_20px_rgba(255,215,0,0.4)]">
+        <h2 className="font-harry-potter text-4xl md:text-7xl text-white mb-8 drop-shadow-[0_0_20px_rgba(255,215,0,0.4)]">
           About Inceptia 2K26
         </h2>
         
         <div className="glass-morphic p-8 md:p-14 rounded-[2rem] border border-yellow-500/20 bg-gradient-to-b from-transparent via-yellow-900/10 to-transparent backdrop-blur-md shadow-[0_10px_40px_rgba(0,0,0,0.6)]">
-          <p className="text-lg md:text-2xl text-gray-200 leading-relaxed font-body-lg mb-6">
+          <p className="text-md md:text-2xl text-gray-200 leading-relaxed font-body-lg mb-6">
             Inceptia 2K26 is the premier 24-hour national level hackathon where magic meets technology. 
             We aim to foster innovation, collaboration, and rapid prototyping among the brightest minds across the country.
           </p>
-          <p className="text-lg md:text-xl text-gray-300 leading-relaxed font-body-lg">
+          <p className="text-md md:text-xl text-gray-300 leading-relaxed font-body-lg">
             Whether you are a master of Artificial Intelligence, a wizard of Web3, or an innovator in Healthcare and Education, 
             this is your arena to showcase your technical brilliance. Assemble your house, brew your code, and conjure solutions 
             that will leave a lasting impact on the world.

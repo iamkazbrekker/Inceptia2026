@@ -53,7 +53,7 @@ function Countdown() {
             transition={{ delay: idx * 0.1, duration: 0.4 }}
             className="flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-black/50 backdrop-blur-md border border-white/10 shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
           >
-            <span className="font-display-lg text-4xl sm:text-5xl text-white font-bold drop-shadow-md">
+            <span className="font-display-lg text-4xl sm:text-5xl text-white drop-shadow-md">
               {unit.value}
             </span>
             <span className="font-label-md text-[9px] sm:text-[10px] text-gray-400 tracking-[0.2em] uppercase mt-2">

@@ -86,7 +86,7 @@ export default function TimelineSection() {
           {timelineData.map((item, idx) => {
             const isLeft = item.align === "left";
             return (
-              <div key={idx} className={`relative w-full flex ${isLeft ? "justify-start" : "justify-end"} mb-20 last:mb-0`}>
+              <div key={idx} className={`relative w-full flex ${isLeft ? "justify-start" : "justify-end"} mb-10 sm:mb-15 last:mb-0`}>
                 
                 {/* Node Dot on center line */}
                 <div className="absolute left-1/2 top-6 -translate-x-1/2 w-4 h-4 rounded-full bg-yellow-500 border-2 border-black shadow-[0_0_15px_rgba(255,215,0,0.8)] z-20 pulse-gold"></div>
@@ -99,7 +99,7 @@ export default function TimelineSection() {
                   transition={{ delay: 0.2 }}
                   className={`w-[45%] flex flex-col ${isLeft ? "items-end text-right pr-6" : "items-start text-left pl-6"}`}
                 >
-                  <h3 className="font-display-lg text-2xl md:text-4xl text-yellow-100 font-bold mb-2 drop-shadow-md">
+                  <h3 className="font-display-lg text-2xl md:text-4xl text-yellow-100 sm:font-bold mb-2 drop-shadow-md">
                     {item.date}
                   </h3>
                   <p className="font-sans text-sm md:text-lg text-yellow-200/80 font-semibold max-w-[250px]">

@@ -39,7 +39,7 @@ function PrizesSection() {
     <section
       ref={sectionRef}
       id="prizes"
-      className="relative z-10 py-20 px-8 mt-0 md:px-24 overflow-hidden"
+      className="relative w-full py-24 px-4 flex flex-col items-center overflow-hidden z-10"
     >
       {/* Atmospheric glows matching ruins background */}
       <div className="absolute inset-0 pointer-events-none">
@@ -63,7 +63,7 @@ function PrizesSection() {
           style={{
             rotateX: springRX,
             translateZ: springTZ,
-            opacity: springOp,
+            opacity: 1,
             transformStyle: "preserve-3d",
           }}
           className="grid md:grid-cols-3 gap-8 items-end perspective-1000"
@@ -78,12 +78,12 @@ function PrizesSection() {
             className="relative rounded-3xl backdrop-blur-xl p-8 text-center flex flex-col justify-end transition-transform duration-500 hover:-translate-y-4"
             style={{
               height: "400px",
-              background: "linear-gradient(160deg, rgba(30,27,60,0.7) 0%, rgba(10,8,20,0.82) 100%)",
-              border: "1px solid rgba(180,180,220,0.18)",
-              boxShadow: "0 0 40px rgba(140,120,255,0.08), inset 0 0 24px rgba(255,215,0,0.03)",
+              background: "linear-gradient(160deg, rgba(80,75,140,0.75) 0%, rgba(45,40,90,0.85) 60%, rgba(25,20,55,0.9) 100%)",
+              border: "1.5px solid rgba(180,180,255,0.35)",
+              boxShadow: "0 0 60px rgba(140,120,255,0.2), inset 0 0 40px rgba(180,160,255,0.08)",
             }}
           >
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-white/4 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-indigo-300/10 via-purple-500/5 to-transparent pointer-events-none" />
             {/* Silver trophy icon */}
             <div className="flex justify-center mb-5">
               <svg className="w-14 h-14" viewBox="0 0 24 24" fill="none" stroke="rgba(200,200,230,0.85)" strokeWidth="1.4">
@@ -118,13 +118,13 @@ function PrizesSection() {
             className="relative rounded-[28px] backdrop-blur-xl p-10 text-center flex flex-col justify-end md:-translate-y-10 overflow-hidden transition-transform duration-500 hover:scale-105"
             style={{
               height: "500px",
-              background: "linear-gradient(160deg, rgba(60,45,0,0.55) 0%, rgba(10,8,20,0.90) 100%)",
-              border: "1px solid rgba(255,215,0,0.4)",
-              boxShadow: "0 0 90px rgba(255,215,0,0.18), inset 0 0 40px rgba(255,215,0,0.04)",
+              background: "linear-gradient(160deg, rgba(120,90,0,0.80) 0%, rgba(80,55,0,0.85) 50%, rgba(30,20,0,0.90) 100%)",
+              border: "1.5px solid rgba(255,215,0,0.6)",
+              boxShadow: "0 0 120px rgba(255,215,0,0.35), inset 0 0 60px rgba(255,215,0,0.10)",
             }}
           >
             {/* Ambient gold glow layer */}
-            <div className="absolute inset-0 bg-yellow-400/5 blur-2xl animate-pulse pointer-events-none rounded-[28px]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/20 via-amber-500/10 to-transparent animate-pulse pointer-events-none rounded-[28px]" />
             {/* Floating sparkles */}
             <span className="absolute top-6 left-8 text-yellow-300/70 text-xl animate-pulse">✦</span>
             <span className="absolute top-12 right-8 text-yellow-200/60 animate-pulse" style={{ animationDelay: "0.5s" }}>✦</span>
@@ -167,12 +167,12 @@ function PrizesSection() {
             className="relative rounded-3xl backdrop-blur-xl p-8 text-center flex flex-col justify-end transition-transform duration-500 hover:-translate-y-4"
             style={{
               height: "370px",
-              background: "linear-gradient(160deg, rgba(40,22,5,0.65) 0%, rgba(10,8,20,0.82) 100%)",
-              border: "1px solid rgba(180,100,30,0.3)",
-              boxShadow: "0 0 35px rgba(180,100,30,0.1), inset 0 0 20px rgba(255,165,0,0.03)",
+              background: "linear-gradient(160deg, rgba(110,55,10,0.80) 0%, rgba(75,35,5,0.85) 55%, rgba(35,18,3,0.90) 100%)",
+              border: "1.5px solid rgba(205,133,63,0.5)",
+              boxShadow: "0 0 60px rgba(180,100,30,0.25), inset 0 0 35px rgba(205,133,63,0.08)",
             }}
           >
-            <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-amber-500/4 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-amber-500/15 via-orange-600/5 to-transparent pointer-events-none" />
             {/* Bronze/amber trophy icon */}
             <div className="flex justify-center mb-5">
               <svg className="w-14 h-14 drop-shadow-[0_0_8px_rgba(180,100,30,0.5)]" viewBox="0 0 24 24" fill="none" stroke="rgba(205,133,63,0.9)" strokeWidth="1.4">
