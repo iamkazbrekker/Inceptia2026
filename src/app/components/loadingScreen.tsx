@@ -20,8 +20,16 @@ interface Props {
   onComplete: () => void;
 }
 
+// Typed shape for spark positioning data
+interface SparkStyle {
+  left: string;
+  top: string;
+  animationDuration: number;
+  animationDelay: number;
+}
+
 // Floating magical spark particle
-function Spark({ style }: { style: React.CSSProperties }) {
+function Spark({ style }: { style: SparkStyle }) {
   return (
     <motion.div
       className="absolute rounded-full pointer-events-none"
@@ -30,7 +38,8 @@ function Spark({ style }: { style: React.CSSProperties }) {
         height: 3,
         background: "radial-gradient(circle, #ffd700, #ff8c00)",
         boxShadow: "0 0 6px 2px rgba(255,215,0,0.7)",
-        ...style,
+        left: style.left,
+        top: style.top,
       }}
       animate={{
         y: [0, -60, -120],
@@ -38,16 +47,16 @@ function Spark({ style }: { style: React.CSSProperties }) {
         scale: [0.5, 1.2, 0.3],
       }}
       transition={{
-        duration: (style.animationDuration as number) ?? 2.5,
+        duration: style.animationDuration,
         repeat: Infinity,
-        delay: (style.animationDelay as number) ?? 0,
+        delay: style.animationDelay,
         ease: "easeOut",
       }}
     />
   );
 }
 
-const SPARKS = Array.from({ length: 18 }, (_, i) => ({
+const SPARKS: SparkStyle[] = Array.from({ length: 18 }, (_, i) => ({
   left: `${(i * 5.8 + Math.sin(i) * 4) % 100}%`,
   top: `${60 + Math.cos(i * 1.3) * 20}%`,
   animationDuration: 2 + (i % 5) * 0.4,
