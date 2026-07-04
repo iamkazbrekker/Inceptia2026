@@ -1,8 +1,50 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import Image from "next/image";
 import gsap from "gsap";
+
+const domains = [
+  {
+    title: "AI & ML",
+    description:
+      "Build intelligent machine learning models, neural networks, and self-directing software agents to solve automated challenges.",
+    icon: "/emblems/aiml.svg",
+    accentColor: "#f87171",
+    glowColor: "rgba(239, 68, 68, 0.45)",
+  },
+  {
+    title: "Web3 & Fintech",
+    description:
+      "Develop decentralized financial protocols, cryptographic ledger applications, custom smart contracts, and secure blockchain code.",
+    icon: "/emblems/web3.svg",
+    accentColor: "#60a5fa",
+    glowColor: "rgba(59, 130, 246, 0.45)",
+  },
+  {
+    title: "Healthcare",
+    description:
+      "Forge biotech applications, digital diagnostic systems, medical support portals, and assistive technologies to improve patient accessibility.",
+    icon: "/emblems/healthcare.svg",
+    accentColor: "#facc15",
+    glowColor: "rgba(245, 158, 11, 0.45)",
+  },
+  {
+    title: "Education",
+    description:
+      "Design interactive digital classrooms, game-based learning environments, simulation systems, and training interfaces.",
+    icon: "/emblems/education.svg",
+    accentColor: "#34d399",
+    glowColor: "rgba(16, 185, 129, 0.45)",
+  },
+  {
+    title: "Open Innovation",
+    description:
+      "A category dedicated to any groundbreaking technology, software solutions, or physical prototype that does not fit into the other four domains.",
+    icon: "/emblems/otherinnovation.svg",
+    accentColor: "#a78bfa",
+    glowColor: "rgba(139, 92, 246, 0.45)",
+  },
+];
 
 const TOTAL_STEPS = 5;
 
@@ -12,6 +54,8 @@ export default function DomainGateSection() {
   const stageRef = useRef<HTMLDivElement>(null);
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
+  const leftContentRef = useRef<HTMLDivElement>(null);
+  const rightContentRef = useRef<HTMLDivElement>(null);
 
   const stateRef = useRef({
     step: 0,
@@ -30,7 +74,22 @@ export default function DomainGateSection() {
     const stage = stageRef.current;
     const left = leftRef.current;
     const right = rightRef.current;
+    const leftContent = leftContentRef.current;
+    const rightContent = rightContentRef.current;
     if (!section || !title || !stage || !left || !right) return;
+
+    // ── Update domain content inside a panel ─────────────────────────
+    function setDomainContent(contentEl: HTMLDivElement | null, domainIndex: number) {
+      if (!contentEl) return;
+      const d = domains[domainIndex];
+      if (!d) return;
+      const img = contentEl.querySelector<HTMLImageElement>(".domain-icon");
+      const titleEl = contentEl.querySelector<HTMLElement>(".domain-title");
+      const descEl = contentEl.querySelector<HTMLElement>(".domain-desc");
+      if (img) { img.src = d.icon; img.alt = d.title; }
+      if (titleEl) { titleEl.textContent = d.title; (titleEl as HTMLElement).style.color = d.accentColor; }
+      if (descEl) descEl.textContent = d.description;
+    }
 
     const state = stateRef.current;
     const container = document.getElementById("main-scroll-container");
@@ -113,14 +172,18 @@ export default function DomainGateSection() {
 
       const showLeft = step % 2 === 0;
 
+      // Map step → domain index (0-4) and load content before animating
+      const domainIndex = step; // step 0=AI&ML, 1=Web3, 2=Healthcare, 3=Education, 4=OpenInnovation
       if (step === 0) {
         // First: left slides in from the left to center (x: 0)
+        setDomainContent(leftContent, domainIndex);
         gsap.to(left, {
           x: 0, duration: 0.45, ease: "power3.out",
           onComplete: () => onStepComplete(1),
         });
       } else if (showLeft) {
         // Swap: right exits right, left enters from left — simultaneous
+        setDomainContent(leftContent, domainIndex);
         gsap.to(right, { x: "100vw", duration: 0.32, ease: "power3.in" });
         gsap.to(left, {
           x: 0, duration: 0.45, ease: "power3.out", delay: 0.06,
@@ -128,6 +191,7 @@ export default function DomainGateSection() {
         });
       } else {
         // Swap: left exits left, right enters from right — simultaneous
+        setDomainContent(rightContent, domainIndex);
         gsap.to(left, { x: "-100vw", duration: 0.32, ease: "power3.in" });
         gsap.to(right, {
           x: 0, duration: 0.45, ease: "power3.out", delay: 0.06,
@@ -236,46 +300,82 @@ export default function DomainGateSection() {
       >
         {/* Left panel */}
         <div ref={leftRef} className="absolute inset-0 w-full h-full flex items-center justify-start pr-64">
-          <svg viewBox="0 0 700 420" className="w-auto h-full object-contain animate-[pulse_6s_ease-in-out_infinite]" style={{ pointerEvents: 'none' }}>
-            <defs>
-              <clipPath id="left-gate-clip">
-                <path d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z" />
-              </clipPath>
-            </defs>
-            <foreignObject x="0" y="0" width="700" height="420" clipPath="url(#left-gate-clip)">
-              <div xmlns="http://www.w3.org/1999/xhtml" className="w-full h-full bg-white/5 backdrop-blur-md" />
-            </foreignObject>
-            <path
-              d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z"
-              fill="none"
-              stroke="rgba(255, 215, 0, 0.4)"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <div className="relative w-auto h-full">
+            <svg viewBox="0 0 700 420" className="w-auto h-full object-contain animate-[pulse_6s_ease-in-out_infinite]" style={{ pointerEvents: 'none' }}>
+              <defs>
+                <clipPath id="left-gate-clip">
+                  <path d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z" />
+                </clipPath>
+              </defs>
+              <foreignObject x="0" y="0" width="700" height="420" clipPath="url(#left-gate-clip)">
+                <div xmlns="http://www.w3.org/1999/xhtml" className="w-full h-full bg-white/5 backdrop-blur-md" />
+              </foreignObject>
+              <path
+                d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z"
+                fill="none"
+                stroke="rgba(255, 215, 0, 0.4)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {/* Domain content overlay — positioned over the left gate shape */}
+            <div
+              ref={leftContentRef}
+              className="absolute flex flex-col items-center justify-center gap-3 text-center pointer-events-none"
+              style={{
+                top: "12%",
+                left: "13%",
+                width: "35%",
+                height: "70%",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="domain-icon h-50 w-50 object-contain drop-shadow-lg" src="" alt="" />
+              <span className="domain-title font-bold text-2xl leading-tight font-harry-potter" style={{ color: "#f87171" }} />
+              <span className="domain-desc text-white/70 text-xs leading-relaxed" />
+            </div>
+          </div>
         </div>
 
         {/* Right panel ── mirrors left */}
         <div ref={rightRef} className="absolute inset-0 w-full h-full flex items-center justify-end pl-64">
-          <svg viewBox="0 0 700 420" className="w-auto h-full object-contain scale-x-[-1] animate-[pulse_6s_ease-in-out_infinite]" style={{ pointerEvents: 'none' }}>
-            <defs>
-              <clipPath id="right-gate-clip">
-                <path d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z" />
-              </clipPath>
-            </defs>
-            <foreignObject x="0" y="0" width="700" height="420" clipPath="url(#right-gate-clip)">
-              <div xmlns="http://www.w3.org/1999/xhtml" className="w-full h-full bg-white/5 backdrop-blur-md" />
-            </foreignObject>
-            <path
-              d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z"
-              fill="none"
-              stroke="rgba(255, 215, 0, 0.4)"
-              strokeWidth="4"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <div className="relative w-auto h-full">
+            <svg viewBox="0 0 700 420" className="w-auto h-full object-contain scale-x-[-1] animate-[pulse_6s_ease-in-out_infinite]" style={{ pointerEvents: 'none' }}>
+              <defs>
+                <clipPath id="right-gate-clip">
+                  <path d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z" />
+                </clipPath>
+              </defs>
+              <foreignObject x="0" y="0" width="700" height="420" clipPath="url(#right-gate-clip)">
+                <div xmlns="http://www.w3.org/1999/xhtml" className="w-full h-full bg-white/5 backdrop-blur-md" />
+              </foreignObject>
+              <path
+                d="M 90,95 A 45,45 0 0 1 135,50 L 520,50 C 470,55 330,170 330,340 L 135,340 A 45,45 0 0 1 90,295 Z"
+                fill="none"
+                stroke="rgba(255, 215, 0, 0.4)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            {/* Domain content overlay — positioned over the right gate shape (mirror-aware) */}
+            <div
+              ref={rightContentRef}
+              className="absolute flex flex-col items-center justify-center gap-3 text-center pointer-events-none"
+              style={{
+                top: "12%",
+                right: "13%",
+                width: "35%",
+                height: "70%",
+              }}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img className="domain-icon  h-50 w-50 object-contain drop-shadow-lg" src="" alt="" />
+              <span className="domain-title font-bold text-2xl leading-tight font-harry-potter" style={{ color: "#60a5fa" }} />
+              <span className="domain-desc text-white/70 text-xs leading-relaxed" />
+            </div>
+          </div>
         </div>
       </div>
     </section>
