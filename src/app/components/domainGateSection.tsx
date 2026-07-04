@@ -331,7 +331,7 @@ export default function DomainGateSection() {
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="domain-icon h-50 w-50 object-contain drop-shadow-lg" src="" alt="" />
+              <img className="domain-icon h-50 w-50 object-contain drop-shadow-lg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="" />
               <span className="domain-title font-bold text-2xl leading-tight font-harry-potter" style={{ color: "#f87171" }} />
               <span className="domain-desc text-white/70 text-xs leading-relaxed" />
             </div>
@@ -371,7 +371,7 @@ export default function DomainGateSection() {
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img className="domain-icon  h-50 w-50 object-contain drop-shadow-lg" src="" alt="" />
+              <img className="domain-icon  h-50 w-50 object-contain drop-shadow-lg" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" alt="" />
               <span className="domain-title font-bold text-2xl leading-tight font-harry-potter" style={{ color: "#60a5fa" }} />
               <span className="domain-desc text-white/70 text-xs leading-relaxed" />
             </div>
