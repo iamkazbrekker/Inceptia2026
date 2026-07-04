@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import WandCursor from "./components/wandCursor";
@@ -101,19 +101,11 @@ const domainList: DomainItem[] = [
 function Page() {
   const [isLoading, setIsLoading] = useState(true);
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
-  useEffect(() => {
-    // Simulate asset loading
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
-
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <>
       <AnimatePresence>
-        {isLoading && <LoadingScreen key="loading-screen" />}
+        {isLoading && <LoadingScreen key="loading-screen" onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
 
       <div id="main-scroll-container" className={`relative w-full h-screen overflow-y-scroll scroll-smooth snap-y snap-mandatory bg-surface ${isLoading ? 'overflow-hidden' : ''}`}>
@@ -165,11 +157,11 @@ function Page() {
                 </span>
               </motion.div>
 
-              <motion.div variants={itemVariants} className="w-full mb-8 flex justify-start">
+              {/* <motion.div variants={itemVariants} className="w-full mb-8 flex justify-start">
                 <div className="scale-90 origin-left md:scale-100">
                   <Countdown />
                 </div>
-              </motion.div>
+              </motion.div> */}
 
               {/* Golden Register Button with high click priority */}
               <motion.div variants={itemVariants} className="relative z-50">
