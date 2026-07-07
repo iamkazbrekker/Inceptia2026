@@ -111,6 +111,13 @@
   --font-display-lg: var(--font-dragon-hunter), sans-serif;
 }
 
+/* hide the cursor */
+*,
+*::before,
+*::after {
+  cursor: none;
+}
+
 /* Base Headings Style */
 h2,
 h3,

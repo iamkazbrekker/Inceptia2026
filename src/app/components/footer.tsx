@@ -84,7 +84,7 @@ const socials = [
     name: "Instagram",
     href: "https://www.instagram.com/inceptia_pccoer",
     icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
         <rect x="3" y="3" width="18" height="18" rx="5" />
         <circle cx="12" cy="12" r="4" />
         <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none" />
@@ -93,24 +93,24 @@ const socials = [
   },
   {
     name: "LinkedIn",
-    href: "#",
+    href: "https://www.linkedin.com/in/inceptia-hackathon-893227424/",
     icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
         <rect x="3" y="3" width="18" height="18" rx="3" />
-        <circle cx="8" cy="8.5" r="1" fill="currentColor" stroke="none" />
+        <circle cx="7" cy="8.5" r="1" fill="currentColor" stroke="none" />
         <path d="M7 11v6M13 17v-3.5c0-1.5 1-2.5 2.3-2.5S17 12 17 13.5V17M13 11v6" />
       </svg>
     ),
   },
-  {
-    name: "Twitter",
-    href: "#",
-    icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-        <path d="M21 5.5c-.7.3-1.4.55-2.2.65a3.8 3.8 0 0 0 1.66-2.1c-.75.44-1.58.76-2.46.94A3.75 3.75 0 0 0 11.6 8.3c0 .3.03.58.1.85A10.66 10.66 0 0 1 3.9 4.9a3.75 3.75 0 0 0 1.16 5c-.6-.02-1.18-.19-1.68-.46v.05c0 1.83 1.3 3.36 3.03 3.7-.55.15-1.13.17-1.7.06.48 1.5 1.87 2.6 3.52 2.63A7.53 7.53 0 0 1 2.9 17.7a10.6 10.6 0 0 0 5.75 1.68c6.9 0 10.68-5.72 10.68-10.68l-.01-.49A7.6 7.6 0 0 0 21 5.5Z" />
-      </svg>
-    ),
-  },
+  // {
+  //   name: "Twitter",
+  //   href: "#",
+  //   icon: (
+  //     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+  //       <path d="M21 5.5c-.7.3-1.4.55-2.2.65a3.8 3.8 0 0 0 1.66-2.1c-.75.44-1.58.76-2.46.94A3.75 3.75 0 0 0 11.6 8.3c0 .3.03.58.1.85A10.66 10.66 0 0 1 3.9 4.9a3.75 3.75 0 0 0 1.16 5c-.6-.02-1.18-.19-1.68-.46v.05c0 1.83 1.3 3.36 3.03 3.7-.55.15-1.13.17-1.7.06.48 1.5 1.87 2.6 3.52 2.63A7.53 7.53 0 0 1 2.9 17.7a10.6 10.6 0 0 0 5.75 1.68c6.9 0 10.68-5.72 10.68-10.68l-.01-.49A7.6 7.6 0 0 0 21 5.5Z" />
+  //     </svg>
+  //   ),
+  // },
 ];
 
 export default function Footer() {
@@ -138,7 +138,7 @@ export default function Footer() {
               INCEPTIA 2K26
             </div>
             <p className="font-body-md leading-relaxed text-gray-300">
-              inceptia2026@gmail.com
+              inceptia2025@gmail.com
               <br />
               Pimpri Chinchwad College of Engineering and Research, Ravet, Pune.
             </p>
@@ -222,7 +222,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.name}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-yellow-500/25 text-gray-300 transition-all hover:-translate-y-0.5 hover:border-yellow-400/60 hover:text-yellow-400 hover:shadow-[0_0_12px_rgba(212,175,55,0.35)]"
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-yellow-500/25 text-gray-300 transition-all hover:-translate-y-0.5 hover:border-yellow-400/60 hover:text-yellow-400 hover:shadow-[0_0_12px_rgba(212,175,55,0.35)]"
               >
                 {s.icon}
               </a>

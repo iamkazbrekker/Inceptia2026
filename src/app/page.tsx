@@ -134,10 +134,29 @@ function Page() {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="max-w-4xl flex flex-col items-center md:items-start justify-center gap-6 mt-12 w-full"
+              className="max-w-4xl flex flex-col items-center md:items-start justify-center gap-4 mt-12 w-full"
             >
+              {/* College & Dept Badge - place above the title inside containerVariants */}
+              <motion.div
+                variants={itemVariants}
+                className="flex items-center gap-3 rounded-2xl border border-yellow-500/20 bg-white/40 backdrop-blur-md px-4 py-2"
+              >
+                <img
+                  src="/pccoer-logo.png"
+                  alt="College Logo"
+                  className="h-12 w-12 sm:h-14 sm:w-14 object-contain drop-shadow-[0_0_8px_rgba(255,215,0,0.9)]"
+                />
+                <div className="flex flex-col text-left leading-tight">
+                  <span className="text-black/90 text-xs sm:text-sm font-bold tracking-wide">
+                    Pimpri Chinchwad College of Engineering and Research, Ravet, Pune.
+                  </span>
+                  <span className="text-yellow-400/80 text-[10px] sm:text-xs font-semibold uppercase tracking-widest">
+                    Department of Information Technology
+                  </span>
+                </div>
+              </motion.div>
               {/* Logo / Title animation */}
-              <motion.div variants={itemVariants} className="text-center md:text-left pt-10">
+              <motion.div variants={itemVariants} className="text-center md:text-left pt-1">
                 <h1
                   className="font-harry-potter text-[3.5rem] leading-[1.1] sm:text-7xl md:text-[110px] lg:text-[125px] text-white select-none italic pt-4 md:leading-tight"
                   style={{
@@ -157,7 +176,7 @@ function Page() {
                 <span className="inline-block mb-4 rounded-xl border border-yellow-500/30 bg-black/40 px-4 py-2 text-center font-semibold uppercase tracking-[0.08em] text-xs sm:text-sm lg:text-base text-yellow-400 drop-shadow-[0_0_10px_rgba(255,215,0,0.5)]">
                   7th - 8th August 2026
                 </span>
-                
+
                 <div className="w-full flex justify-center md:justify-start">
                   <div className="scale-90 origin-center md:origin-left md:scale-100">
                     <Countdown />
