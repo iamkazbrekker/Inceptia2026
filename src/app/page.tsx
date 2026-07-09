@@ -124,7 +124,7 @@ function Page() {
         </div>
 
         {/* Custom Magic Wand Cursor */}
-        <WandCursor />
+        {/* <WandCursor /> */}
 
         {/* 1. Hero Section */}
         <div className="w-full h-screen snap-start snap-always shrink-0 overflow-hidden flex flex-col justify-center items-start relative z-10">
@@ -139,7 +139,7 @@ function Page() {
               {/* College & Dept Badge - place above the title inside containerVariants */}
               <motion.div
                 variants={itemVariants}
-                className="flex items-center gap-3 rounded-2xl border border-yellow-500/20 bg-white/40 backdrop-blur-md px-4 py-2"
+                className="flex items-center gap-3 rounded-2xl border border-yellow-500/20 bg-white/5 backdrop-blur-md px-4 py-2"
               >
                 <img
                   src="/pccoer-logo.png"
@@ -147,7 +147,7 @@ function Page() {
                   className="h-12 w-12 sm:h-14 sm:w-14 object-contain drop-shadow-[0_0_8px_rgba(255,215,0,0.9)]"
                 />
                 <div className="flex flex-col text-left leading-tight">
-                  <span className="text-black/90 text-xs sm:text-sm font-bold tracking-wide">
+                  <span className="text-white/90 text-xs sm:text-sm font-bold tracking-wide">
                     Pimpri Chinchwad College of Engineering and Research, Ravet, Pune.
                   </span>
                   <span className="text-yellow-400/80 text-[10px] sm:text-xs font-semibold uppercase tracking-widest">
