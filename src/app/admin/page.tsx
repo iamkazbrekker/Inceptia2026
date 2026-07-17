@@ -53,7 +53,9 @@ export default function Page() {
         scanner.render(
           async (decodedText) => {
             // Immediately stop scanner and clear
-            await scanner.clear().catch(() => { });
+            if (scanner) {
+              await scanner.clear().catch(() => { });
+            }
             setScanning(false);
             setStatus('loading');
             setMessage("Checking credentials in the Great Hall records...");
